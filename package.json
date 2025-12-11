@@ -1,0 +1,19 @@
+{
+  "name": "detectllmuse",
+  "version": "1.0.0",
+  "description": "A web application to detect and mitigate LLM use by crowdsourced workers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/annalantink/detectLLMuse"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "express": "^5.2.1"
+  }
+}
