@@ -1,37 +1,16 @@
-
-html{
-    font-family: Helvetica
-}
-
-body{
+html, body{
+    font-family: Helvetica;
+    height: 100%;
     margin: 0;
 }
 
-h1 {font-size: 40px;}
-
-p {
-    font-size: 18px;
-    text-align: justify;
-}
-
-button {
-    font-size: 20px;
-    background-color: #1991c8;
-    margin-top: 30px;
-    margin-left: 80%;
-    padding: 20px;
-    border-radius: 16px;
-    color: white;
-}
-
 .container{
-    grid-template-columns: 20% auto;
+    grid-template-columns: 10% auto;
     display: grid;
 }
 
 .sidebar{
     background-color: #BFE6F7;
-
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -46,7 +25,7 @@ button {
     height: 500px;
     width: 10px;
 
-    left: 9.8%;
+    left: 4.8%;
 }
 
 .sidebar > div {
@@ -75,8 +54,83 @@ button {
     background-color: #7D99A6;
 }
 
+@media only screen and (max-width: 1500px) {
+    .sidebar {
+        display: none;
+    }
+}
+
 .container_body{
-    margin-top: 100px;
+    margin-top: 40px;
     margin-left: 75px;
     margin-right: 75px;
+}
+
+/* .summarization {
+    grid-template-columns: 50% 50%;
+    display: grid;
+} */
+
+.summarization > div {
+    text-align: justify;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 10px;
+    background-color: #d4dbdf;
+    border-radius: 16px;
+}
+
+.sample_summary {
+    min-height: 200px;
+}
+
+h1 {font-size: 40px;}
+
+p {
+    font-size: 17px;
+    text-align: justify;
+}
+
+.button_container{
+    margin-left: 1%;
+    grid-template-columns: 50% 50%;
+    display: grid;
+}
+
+button {
+    font-size: 20px;
+    background-color: #1991c8;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 16px;
+    color: white;
+    border: none;
+    width: 170px;
+}
+
+button:hover{
+    background-color: #1777a3;
+    cursor: pointer;
+}
+
+.next_button {
+    float: right;
+    margin-right: 01%;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.input_summary {
+    border: none;
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 10px;
+    resize: none;
+    overflow: scroll;
+    font-size: 17px;
 }
