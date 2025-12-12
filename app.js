@@ -22,6 +22,10 @@ app.get('/summarize_two', (req, res) => {
   res.sendFile("summarize_two.html", { root: __dirname + "/public" });
 })
 
+app.get('/survey', (req, res) => {
+  res.sendFile("survey.html", { root: __dirname + "/public" });
+})
+
 app.listen(port, () => {
   console.log("Crowd computing application running on port ${port}")
 })

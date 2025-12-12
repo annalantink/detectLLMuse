@@ -10,7 +10,7 @@ html, body{
 }
 
 .sidebar{
-    background-color: #BFE6F7;
+    background-color: #ddc9fd;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@ html, body{
 }
 
 .line {
-    background-color: #7D99A6;
+    background-color: #b1a3c5;
     border: none;
     position:absolute;
 
@@ -42,16 +42,15 @@ html, body{
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    background-color: #1991c8;
     border-radius: 50%;
 }
 
 .sidebar > div > .active{
-    background-color: #1991c8;
+    background-color: #8e60be;
 }
 
 .sidebar > div > .inactive{
-    background-color: #7D99A6;
+    background-color: #b1a3c5;
 }
 
 @media only screen and (max-width: 1500px) {
@@ -78,7 +77,7 @@ html, body{
     padding-left: 30px;
     padding-right: 30px;
     margin: 10px;
-    background-color: #d4dbdf;
+    background-color: #e8e4ee;
     border-radius: 16px;
 }
 
@@ -101,7 +100,7 @@ p {
 
 button {
     font-size: 20px;
-    background-color: #1991c8;
+    background-color: #8e60be;
     margin-top: 20px;
     padding: 20px;
     border-radius: 16px;
@@ -111,7 +110,7 @@ button {
 }
 
 button:hover{
-    background-color: #1777a3;
+    background-color: #745892;
     cursor: pointer;
 }
 
@@ -126,7 +125,6 @@ a {
 }
 
 .input_summary {
-    border: none;
     width: 100%;
     min-height: 100px;
     margin-bottom: 10px;
