@@ -1,11 +1,12 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
 import { getEmbedding } from "./embedder.js";
 import { getUserEmbedding } from "./userEmbedding.js";
 
-const RESPONSES_DIR = "./llm-responses";
-
-// ---------- Cosine similarity ---------- 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function cosineSimilarity(a, b) {
   let dot = 0;
@@ -21,42 +22,36 @@ function cosineSimilarity(a, b) {
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
-// ---------- Call logic ---------- 
+export async function compareUserResponse(userText, task = "summary1") {
+  console.log("Received detection request:", task, userText.length);
 
-async function compareUserResponse(userText) {
-  const files = fs.readdirSync(RESPONSES_DIR)
+  const responses_dir = path.join(__dirname, "../../../llm-responses"); 
+
+  const referenceFolder =
+    task === "summary1"
+      ? path.join(responses_dir, "summary1")
+      : path.join(responses_dir, "summary2");
+
+  let files = fs.readdirSync(referenceFolder);
 
   const userEmbedding = await getUserEmbedding(userText);
-  const results = [];
+
+  let maxSimilarity = 0;
 
   for (const file of files) {
-    const content = fs.readFileSync(
-      path.join(RESPONSES_DIR, file),
-      "utf-8"
-    );
-
+    const content = fs.readFileSync(path.join(referenceFolder, file), "utf-8");
     const embedding = await getEmbedding(content);
     const similarity = cosineSimilarity(userEmbedding, embedding);
 
-    results.push({
-      file,
-      similarity
-    });
+    if (similarity > maxSimilarity) {
+      maxSimilarity = similarity;
+    }
   }
 
-  results.sort((a, b) => b.similarity - a.similarity);
-  return results;
-}
+  console.log("Max similarity computed:", maxSimilarity);
 
-// ---------- Example usage ---------- 
-
-const userText = `
-This abstract is about the prevention of using LLM to generate responses in crowd working settings. 
-`;
-
-const results = await compareUserResponse(userText);
-
-console.log("Similarity ranking:");
-for (const r of results) {
-  console.log(`${r.file}: ${r.similarity.toFixed(4)}`);
+  return {
+    similarity: maxSimilarity
+  };
+  
 }
