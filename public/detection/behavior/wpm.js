@@ -3,7 +3,7 @@ var WPM_LOG_INTERVAL = 1000;
 var WPM_LOG_COOLDOWN = 10000;
 var THROTTLE = 200;
 
-var DEBUG_WPM_LOG = true; // [DEBUG] logs WPM in the console if enabled
+var DEBUG_WPM_LOG = false; // [DEBUG] logs WPM in the console if enabled
 var DEBUG_LOG_INTERVAL = 1000; 
 
 
@@ -18,7 +18,7 @@ function computeWpm(el, startTs) {
     var elapsed = (Date.now() - startTs) / 1000;
     var wpm = 0;
 
-    if (elapsed >= 1) {
+    if (elapsed >= 1) { // edge case: avoid high WPM at the very start
         wpm = Math.round((words / elapsed) * 60);
         if (!isFinite(wpm)) wpm = 0;
     }
