@@ -10,6 +10,14 @@ if (Bun.env.DATABASE_URL == null) {
     throw new Error("No database url in env.");
 }
 
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': `${Bun.env.FRONTEND}`,
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Max-Age': '86400',
+};
+
 
 interface ResponsePayload {
     worker: string;
@@ -24,6 +32,9 @@ const server = Bun.serve({
         "/api/status": new Response("OK"),
 
         "/api/response/add": {
+            OPTIONS: () => {
+                return new Response(null, { status: 204, headers: CORS_HEADERS });
+            },
             POST: async req => {
                 try {
                     const body: ResponsePayload = await req.json() as ResponsePayload;
@@ -42,7 +53,7 @@ const server = Bun.serve({
                         worker,
                         number_popups,
                         response
-                    }, { status: 201 });
+                    }, { status: 201, headers: CORS_HEADERS, });
                 } catch (error) {
                     console.error("API Error:", error);
                     return Response.json({ status: 400 })
@@ -55,7 +66,7 @@ const server = Bun.serve({
                 if (postgres != null) {
                     let data = await postgres`SELECT * FROM summarize_one`
                     console.log(data)
-                    return new Response(JSON.stringify(data, null, 2))
+                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS })
                 }
                 return Response.json({ status: 400 })
             }
