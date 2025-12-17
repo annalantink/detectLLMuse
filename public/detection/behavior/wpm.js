@@ -7,15 +7,14 @@ var DEBUG_WPM_LOG = true; // [DEBUG] logs WPM in the console if enabled
 var DEBUG_LOG_INTERVAL = 1000; 
 
 
-function count_words(text) {
+function countWords(text) {
     if (!text) return 0;
     return text.trim().split(/\s+/).filter(Boolean).length; // non-empty strings
 }
 
-function compute_wpm(el, startTs) {
-
+function computeWpm(el, startTs) {
     var text = el.value || '';
-    var words = count_words(text);
+    var words = countWords(text);
     var elapsed = (Date.now() - startTs) / 1000;
     var wpm = 0;
 
@@ -27,8 +26,7 @@ function compute_wpm(el, startTs) {
     return { wpm: wpm, words: words, elapsed: Math.round(elapsed) };
 }
 
-function init_textarea(el) {
-
+function initTextarea(el) {
     var started = false;
     var startTs = null; // starting timestamp
     var lastUpdate = 0; 
@@ -38,7 +36,7 @@ function init_textarea(el) {
 
     function update(debug) {
         if (!started) return;
-        var metrics = compute_wpm(el, startTs);
+        var metrics = computeWpm(el, startTs);
 
         // wait 1s to avoid huge WPM
         if (metrics.elapsed < 1) return;
@@ -72,6 +70,18 @@ function init_textarea(el) {
         }
     });
 
+    window.addEventListener('beforeunload', function () {
+        pauseInterval()
+    });
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            pauseInterval()
+        } else {
+            if (started) startIntervals();
+        }
+    });
+
     function startIntervals() {
         if (!updaterInterval) updaterInterval = window.setInterval(update, WPM_LOG_INTERVAL);
         if (DEBUG_WPM_LOG && !debugInterval) debugInterval = window.setInterval(function () { update(true); }, DEBUG_LOG_INTERVAL);
@@ -92,21 +102,9 @@ function init_textarea(el) {
         update();
         stopIntervals();
     }
-
-    window.addEventListener('beforeunload', function () {
-        pauseInterval()
-    });
-
-    document.addEventListener('visibilitychange', function () {
-        if (document.hidden) {
-            pauseInterval()
-        } else {
-            if (started) startIntervals();
-        }
-    });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     var areas = document.querySelectorAll('.input_summary');
-    areas.forEach(init_textarea);
+    areas.forEach(initTextarea);
 });
