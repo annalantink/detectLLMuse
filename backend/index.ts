@@ -1,10 +1,8 @@
 import { SQL } from "bun";
 
 let postgres: SQL | null = null;
-console.log(Bun.env.DATABASE_URL);
 if (Bun.env.DATABASE_URL != null) {
     postgres = new SQL(Bun.env.DATABASE_URL); // Add ?sslmode=require to the url
-    console.log("Connected")
 }
 if (Bun.env.DATABASE_URL == null) {
     throw new Error("No database url in env.");
@@ -18,11 +16,17 @@ const CORS_HEADERS = {
     'Access-Control-Max-Age': '86400',
 };
 
+const ALLOWED_TABLES = ['task_one', 'task_two', 'survey'];
 
 interface ResponsePayload {
-    worker: string;
+    worker_number: number;
+    task: string;
     number_popups: number;
-    response: string;
+    response?: string;
+    question1?: string,
+    question2?: string,
+    question3?: string,
+    question4?: string,
 }
 
 const server = Bun.serve({
@@ -38,26 +42,61 @@ const server = Bun.serve({
             POST: async req => {
                 try {
                     const body: ResponsePayload = await req.json() as ResponsePayload;
-                    const { worker, number_popups, response } = body;
-                    if (postgres != null) {
-                        console.log(body)
-                        await postgres`
-                        INSERT INTO summarize_one (worker, number_popups, response, created_at)
-                        VALUES (${worker}, ${number_popups}, ${JSON.stringify(response)}, NOW())
-                    `;
-                    } else {
+                    const { worker_number, task, number_popups, response,
+                        question1,
+                        question2,
+                        question3,
+                        question4, } = body;
+                    if (!worker_number || !task) {
                         return Response.json(
-                            { error: "Database not connected" },
+                            { error: "Missing: worker_number, task" },
                             { status: 400, headers: CORS_HEADERS }
                         );
                     }
-                    return Response.json({
-                        created: true,
-                        worker,
-                        number_popups,
-                        response
-                    }, { status: 201, headers: CORS_HEADERS, });
-                } catch (error) {
+                    if (!ALLOWED_TABLES.includes(task)) {
+                        return new Response(JSON.stringify({ error: "Invalid task name" }), { status: 403, headers: CORS_HEADERS });
+                    }
+                    if (postgres != null) {
+                        if (task == "survey") {
+                            await postgres`
+                                INSERT INTO survey 
+                                (worker_number, number_popups, question_1, question_2, question_3, question_4, created_at)
+                                VALUES (
+                                    ${worker_number}, 
+                                    ${number_popups}, 
+                                    ${question1}, 
+                                    ${question2}, 
+                                    ${question3}, 
+                                    ${question4}, 
+                                    NOW()
+                                )
+                            `;
+                        }
+                        if (task == "task_one" || task == "task_two") {
+                            await postgres`
+                                INSERT INTO ${postgres(task)} (worker_number, number_popups, response, created_at)
+                                VALUES (${worker_number}, ${number_popups}, ${response}, NOW())
+                            `;
+                        } else {
+                            return Response.json(
+                                { error: "Unknown task" },
+                                { status: 400, headers: CORS_HEADERS }
+                            );
+                        }
+                        return Response.json({
+                            created: true,
+                            worker_number,
+                            number_popups,
+                            response
+                        }, { status: 201, headers: CORS_HEADERS, });
+                    } else {
+                        return Response.json(
+                            { error: "Database not connected" },
+                            { status: 503, headers: CORS_HEADERS }
+                        );
+                    }
+                }
+                catch (error) {
                     console.error("API Error:", error);
                     return Response.json(
                         { error: "Internal Server Error" },
@@ -67,12 +106,25 @@ const server = Bun.serve({
             },
         },
 
-        "/api/response/get": {
+        "/api/response/get/:task": {
+            GET: async (req) => {
+                const taskName = req.params.task;
+                if (!ALLOWED_TABLES.includes(taskName)) {
+                    return new Response(JSON.stringify({ error: "Invalid task name" }), { status: 403, headers: CORS_HEADERS });
+                }
+                if (postgres != null) {
+                    let data = await postgres`SELECT * FROM ${postgres(taskName)}`
+                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS })
+                }
+                return Response.json({ status: 400, headers: CORS_HEADERS })
+            }
+        },
+
+        "/api/worker/number": {
             GET: async () => {
                 if (postgres != null) {
-                    let data = await postgres`SELECT * FROM summarize_one`
-                    console.log(data)
-                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS })
+                    let data = await postgres`INSERT INTO workers DEFAULT VALUES RETURNING worker_number;`
+                    return new Response(JSON.stringify({ "worker_number": data[0].worker_number }), { headers: CORS_HEADERS })
                 }
                 return Response.json({ status: 400, headers: CORS_HEADERS })
             }

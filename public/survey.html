@@ -1,91 +1,139 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/survey.css">
-        <title>Abstract Summarization</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="sidebar_container">
-                <div style="height: 100vh;" class="sidebar">
-                    <div class="line"></div>
-                    <div>
-                        <p class="inactive">1</p>
-                        <p class="inactive">2</p>
-                        <p class="inactive">3</p>
-                        <p class="inactive">4</p>
-                        <p class="active">5</p>
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top: 20px;" class="container_body">
-                <h1>Survey</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                    Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                </p>
-                <div class="summarization">
-                    <div>
-                        <form>
-                            <p>
-                                1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                            </p>
-                            <div class="radio_list">
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 1</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 2</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 3</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 4</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 5</label>
-                                </div>
-                            </div>
-                            <p>
-                                2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                            </p>
-                            <textarea rows="3" cols="180" class="survey_textarea"></textarea>
-                            <p>
-                                3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                            </p>
-                            <textarea rows="3" cols="180" class="survey_textarea"></textarea>
 
-                            <p>
-                                4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                            </p>
-                            <textarea rows="3" cols="180" class="survey_textarea"></textarea>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/survey.css">
+    <title>Abstract Summarization</title>
+</head>
 
-                            
-                        </form>
-                    </div>
-                </div>
-                <div class="button_container">
-                    <div>
-                        <a href="/summarize_two"><button class="prev_button">Previous Page</button></a>
-                    </div>
-                    <div>
-                        <a href="/"><button class="next_button">Submit</button></a>
-                    </div>
+<body>
+    <div class="container">
+        <div class="sidebar_container">
+            <div style="height: 100vh;" class="sidebar">
+                <div class="line"></div>
+                <div>
+                    <p class="inactive">1</p>
+                    <p class="inactive">2</p>
+                    <p class="inactive">3</p>
+                    <p class="inactive">4</p>
+                    <p class="active">5</p>
                 </div>
             </div>
         </div>
-    </body>
+        <div style="margin-top: 20px;" class="container_body">
+            <h1>Survey</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in
+                ex.
+                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+            </p>
+            <div class="summarization">
+                <div>
+                    <form id="surveyForm">
+                        <p>
+                            1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
+                            fringilla at in ex.
+                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                        </p>
+                        <div class="radio_list">
+                            <div>
+                                <input type="radio" id="q1_option1" name="question1" value="Example 1" required>
+                                <label for="q1_option1">Example 1</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="q1_option2" name="question1" value="Example 2">
+                                <label for="q1_option2">Example 2</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="q1_option3" name="question1" value="Example 3">
+                                <label for="q1_option3">Example 3</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="q1_option4" name="question1" value="Example 4">
+                                <label for="q1_option4">Example 4</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="q1_option5" name="question1" value="Example 5">
+                                <label for="q1_option5">Example 5</label>
+                            </div>
+                        </div>
+                        <p>
+                            2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
+                            fringilla at in ex.
+                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                        </p>
+                        <textarea rows="3" cols="180" class="survey_textarea" id="question2_text"></textarea>
+                        <p>
+                            3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
+                            fringilla at in ex.
+                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                        </p>
+                        <textarea rows="3" cols="180" class="survey_textarea" id="question3_text"></textarea>
+
+                        <p>
+                            4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
+                            fringilla at in ex.
+                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                        </p>
+                        <textarea rows="3" cols="180" class="survey_textarea" id="question4_text"></textarea>
+                    </form>
+                </div>
+            </div>
+            <div class="button_container">
+                <!-- <div>
+                        <a href="/summarize_two"><button class="prev_button">Previous Page</button></a>
+                    </div> -->
+                <div>
+                    <a href="#"><button class="next_button" onclick="submitResponse()">Submit</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function submitResponse() {
+        const q1Radio = document.querySelector('input[name="question1"]:checked');
+        const q1Response = q1Radio ? q1Radio.value : '';
+
+        const q2Response = document.getElementById('question2_text').value;
+        const q3Response = document.getElementById('question3_text').value;
+        const q4Response = document.getElementById('question4_text').value;
+        const responseData = {
+            "worker_number": Number(sessionStorage.getItem('workerNumber')),
+            "task": "survey",
+            "number_popups": 7, // TODO
+            "question1": q1Response,
+            "question2": q2Response,
+            "question3": q3Response,
+            "question4": q4Response
+        };
+
+        const postUrl = "http://localhost:8080/api/response/add";
+
+        fetch(postUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(responseData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error submitting form:', error);
+                alert('An error occurred during submission. Please try again.');
+            });
+    }
+</script>
+
 </html>
