@@ -46,7 +46,7 @@ const server = Bun.serve({
                         VALUES (${worker}, ${number_popups}, ${JSON.stringify(response)}, NOW())
                     `;
                     } else {
-                        return Response.json({ status: 400 })
+                        return Response.json({ status: 400, headers: CORS_HEADERS })
                     }
                     return Response.json({
                         created: true,
@@ -56,7 +56,7 @@ const server = Bun.serve({
                     }, { status: 201, headers: CORS_HEADERS, });
                 } catch (error) {
                     console.error("API Error:", error);
-                    return Response.json({ status: 400 })
+                    return Response.json({ status: 400, headers: CORS_HEADERS })
                 }
             },
         },
@@ -68,13 +68,13 @@ const server = Bun.serve({
                     console.log(data)
                     return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS })
                 }
-                return Response.json({ status: 400 })
+                return Response.json({ status: 400, headers: CORS_HEADERS })
             }
         },
     },
 
     fetch(req) {
-        return new Response("Not Found", { status: 404 });
+        return new Response("Not Found", { status: 404, headers: CORS_HEADERS });
     },
 });
 
