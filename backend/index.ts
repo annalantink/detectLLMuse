@@ -35,6 +35,7 @@ const server = Bun.serve({
 
         "/api/status": new Response("OK"),
 
+        // Add to the table.
         "/api/response/add": {
             OPTIONS: () => {
                 return new Response(null, { status: 204, headers: CORS_HEADERS });
@@ -71,6 +72,12 @@ const server = Bun.serve({
                                     NOW()
                                 )
                             `;
+                            return Response.json({
+                                created: true,
+                                worker_number,
+                                number_popups,
+                                response
+                            }, { status: 201, headers: CORS_HEADERS, });
                         }
                         if (task == "task_one" || task == "task_two") {
                             await postgres`
@@ -106,6 +113,7 @@ const server = Bun.serve({
             },
         },
 
+        // Get responses from a task or survey.
         "/api/response/get/:task": {
             GET: async (req) => {
                 const taskName = req.params.task;
@@ -120,6 +128,7 @@ const server = Bun.serve({
             }
         },
 
+        // Gives the worker an unique number.
         "/api/worker/number": {
             GET: async () => {
                 if (postgres != null) {
