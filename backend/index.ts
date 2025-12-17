@@ -11,11 +11,11 @@ if (Bun.env.DATABASE_URL == null) {
 }
 
 const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': `${Bun.env.FRONTEND}`,
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Allow-Credentials': 'true',
-  'Access-Control-Max-Age': '86400',
+    'Access-Control-Allow-Origin': `${Bun.env.FRONTEND}`,
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Max-Age': '86400',
 };
 
 
@@ -46,7 +46,10 @@ const server = Bun.serve({
                         VALUES (${worker}, ${number_popups}, ${JSON.stringify(response)}, NOW())
                     `;
                     } else {
-                        return Response.json({ status: 400, headers: CORS_HEADERS })
+                        return Response.json(
+                            { error: "Database not connected" },
+                            { status: 400, headers: CORS_HEADERS }
+                        );
                     }
                     return Response.json({
                         created: true,
@@ -56,7 +59,10 @@ const server = Bun.serve({
                     }, { status: 201, headers: CORS_HEADERS, });
                 } catch (error) {
                     console.error("API Error:", error);
-                    return Response.json({ status: 400, headers: CORS_HEADERS })
+                    return Response.json(
+                        { error: "Internal Server Error" },
+                        { status: 400, headers: CORS_HEADERS }
+                    );
                 }
             },
         },
