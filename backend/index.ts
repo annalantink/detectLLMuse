@@ -43,7 +43,7 @@ const server = Bun.serve({
                         console.log(body)
                         await postgres`
                         INSERT INTO summarize_one (worker, number_popups, response, created_at)
-                        VALUES (${worker}, ${number_popups}, ${response}, NOW())
+                        VALUES (${worker}, ${number_popups}, ${JSON.stringify(response)}, NOW())
                     `;
                     } else {
                         return Response.json({ status: 400 })
