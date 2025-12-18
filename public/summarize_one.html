@@ -47,7 +47,7 @@
                     </div>
                     <div class="sample_summary"> 
                         <h2> Summary </h2>
-                        <textarea rows="6" cols="180" class="input_summary"></textarea>
+                        <textarea id="summaryOneInput" rows="6" cols="180" class="input_summary"></textarea>
                     </div>
                 </div>
                 
@@ -61,5 +61,9 @@
                 </div>
             </div>
         </div>
+        <script src="detection/detection.js"></script>
+        <script>
+            setupDetection("summaryOneInput", "summary1");
+        </script>
     </body>
 </html>

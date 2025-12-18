@@ -1,31 +1,54 @@
-const express = require('express')
-const path = require('path')
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { compareUserResponse } from "./public/detection/content-based/compareResponses.js";
 
-const app = express()
-const port = 3000
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(express.static(__dirname + "/public"));
+const app = express();
+const port = 3000;
 
-app.get('/', (req, res) => {
-  res.sendFile("index.html", { root: __dirname + "/public" });
-})
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/example_summary', (req, res) => {
-  res.sendFile("example_summary.html", { root: __dirname + "/public" });
-})
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "public") });
+});
 
-app.get('/summarize_one', (req, res) => {
-  res.sendFile("summarize_one.html", { root: __dirname + "/public" });
-})
+app.get("/example_summary", (req, res) => {
+  res.sendFile("example_summary.html", { root: path.join(__dirname, "public") });
+});
 
-app.get('/summarize_two', (req, res) => {
-  res.sendFile("summarize_two.html", { root: __dirname + "/public" });
-})
+app.get("/summarize_one", (req, res) => {
+  res.sendFile("summarize_one.html", { root: path.join(__dirname, "public") });
+});
 
-app.get('/survey', (req, res) => {
-  res.sendFile("survey.html", { root: __dirname + "/public" });
-})
+app.get("/summarize_two", (req, res) => {
+  res.sendFile("summarize_two.html", { root: path.join(__dirname, "public") });
+});
+
+app.get("/survey", (req, res) => {
+  res.sendFile("survey.html", { root: path.join(__dirname, "public") });
+});
+
+
+app.post("/detect", async (req, res) => {
+  const { text, task } = req.body;
+
+  if (!text || text.length < 100) {
+    return res.status(400).json({ error: "Text too short" });
+  }
+
+  try {
+    const result = await compareUserResponse(text, task);
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Detection failed" });
+  }
+});
 
 app.listen(port, () => {
-  console.log("Crowd computing application running on port ${port}")
-})
+  console.log(`Crowd computing application running on port ${port}`);
+});
