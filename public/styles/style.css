@@ -5,7 +5,7 @@ html, body{
 }
 
 .container{
-    grid-template-columns: 10% auto;
+    grid-template-columns: 9% auto;
     display: grid;
 }
 
@@ -21,11 +21,9 @@ html, body{
     background-color: #b1a3c5;
     border: none;
     position:absolute;
-
-    height: 500px;
-    width: 10px;
-
-    left: 4.8%;
+    height: 450px;
+    width: 9px;
+    left: 4.3%;
 }
 
 .sidebar > div {
@@ -34,14 +32,14 @@ html, body{
 }
 
 .sidebar > div > p {
-    font-size: 50px;
-    padding: 10px;
+    font-size: 45px;
+    padding: 9px;
     text-align: center;
     color: white;
 
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
 }
 
@@ -53,16 +51,17 @@ html, body{
     background-color: #b1a3c5;
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1024px) {
     .sidebar {
         display: none;
     }
 }
 
 .container_body{
-    margin-top: 40px;
-    margin-left: 75px;
-    margin-right: 75px;
+    margin-top: 36px;
+    margin-left: 67px;
+    margin-right: 67px;
+    min-width: 500px;
 }
 
 /* .summarization {
@@ -72,41 +71,35 @@ html, body{
 
 .summarization > div {
     text-align: justify;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin: 10px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 27px;
+    padding-right: 27px;
+    margin: 9px;
     background-color: #e8e4ee;
     border-radius: 16px;
 }
 
 .sample_summary {
-    min-height: 200px;
+    min-height: 180px;
 }
 
-h1 {font-size: 40px;}
+h1 {font-size: 36px;}
 
 p {
-    font-size: 17px;
+    font-size: 15px;
     text-align: justify;
 }
 
-.button_container{
-    margin-left: 1%;
-    grid-template-columns: 50% 50%;
-    display: grid;
-}
-
 button {
-    font-size: 20px;
+    font-size: 18px;
     background-color: #8e60be;
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 16px;
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 14px;
     color: white;
     border: none;
-    width: 170px;
+    width: 153px;
 }
 
 button:hover{
@@ -115,8 +108,7 @@ button:hover{
 }
 
 .next_button {
-    float: right;
-    margin-right: 01%;
+    margin-left: 85%;
 }
 
 a {
@@ -127,8 +119,7 @@ a {
 .input_summary {
     width: 100%;
     min-height: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
     resize: none;
-    overflow: scroll;
-    font-size: 17px;
+    font-size: 15px;
 }
