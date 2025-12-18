@@ -1,0 +1,54 @@
+.info_bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    background-color: #ddc9fd;
+    overflow-x: hidden;
+    padding-top: 50px;
+}
+
+.info_bar .close_info {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.info_bar .close_info:hover {
+    color: #f1f1f1;
+}
+
+
+.info_button {
+    position: absolute;
+    font-size: 25px;
+    background-color: #8e60be;
+    margin-top: 18px;
+    padding: 10px;
+    border-radius: 14px;
+    color: white;
+    border: none;
+    width: 50px;
+    /* margin-left: 94%; */
+    margin-left: 77vw;
+    cursor: pointer;
+}
+
+.info_button:hover{
+    background-color: #745892;
+}
+
+.info_text{
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 10px;
+    padding-bottom: 100px;
+}

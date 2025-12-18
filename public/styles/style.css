@@ -91,7 +91,7 @@ p {
     text-align: justify;
 }
 
-button {
+.next_button {
     font-size: 18px;
     background-color: #8e60be;
     margin-top: 18px;
@@ -100,15 +100,12 @@ button {
     color: white;
     border: none;
     width: 153px;
+    margin-left: 85%;
 }
 
-button:hover{
+.next_button:hover{
     background-color: #745892;
     cursor: pointer;
-}
-
-.next_button {
-    margin-left: 85%;
 }
 
 a {
