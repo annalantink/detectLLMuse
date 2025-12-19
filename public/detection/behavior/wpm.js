@@ -1,10 +1,12 @@
-var WPM_THRESHOLD = 120;
+var WPM_THRESHOLD = 45;
 var WPM_LOG_INTERVAL = 1000;
 var WPM_LOG_COOLDOWN = 10000;
 var THROTTLE = 200;
 
-var DEBUG_WPM_LOG = false; // [DEBUG] logs WPM in the console if enabled
-var DEBUG_LOG_INTERVAL = 1000; 
+var DEBUG_WPM_LOG = true; // [DEBUG] logs WPM in the console if enabled
+var DEBUG_LOG_INTERVAL = 1000;
+
+var WPM_SUSTAIN_MS = 10000; // 45 WPM must be sustained for 10s
 
 
 function countWords(text) {
@@ -33,6 +35,7 @@ function initTextarea(el) {
     var lastLoggedTs = 0;
     var updaterInterval = null;
     var debugInterval = null;
+    var thresholdCounter = null; // how long WPM >= threshold
 
     function update(debug) {
         if (!started) return;
@@ -41,14 +44,23 @@ function initTextarea(el) {
         // wait 1s to avoid huge WPM
         if (metrics.elapsed < 1) return;
 
-        // WPM is too much!
-        if (metrics.wpm > WPM_THRESHOLD) {
-            var nowTs = Date.now();
-            if (nowTs - lastLoggedTs > WPM_LOG_COOLDOWN) {
-                console.log('[WPM Detector] High WPM detected:', metrics);
-                lastLoggedTs = nowTs;
+        var nowTs = Date.now();
+
+        // sustained WPM check (>= 45 for 10 seconds)
+        if (metrics.wpm >= WPM_THRESHOLD) {
+            if (thresholdCounter === null) thresholdCounter = nowTs;
+
+            if ((nowTs - thresholdCounter) >= WPM_SUSTAIN_MS) {
+                if (nowTs - lastLoggedTs > WPM_LOG_COOLDOWN) {
+                    console.log('[WPM Detector] High WPM detected:', metrics);
+                    lastLoggedTs = nowTs;
+                }
             }
+        } else {
+            // reset the sustain timer once WPM drops below threshold
+            thresholdCounter = null;
         }
+
         // [DEBUG] logging.
         if (debug) console.log('[WPM Debug] WPM update:', metrics);
     }
