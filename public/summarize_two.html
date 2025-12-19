@@ -79,7 +79,7 @@
                     include is not relevant for your summary, <b>only the provided abstract text should be summarized.</b>
                 </p>
                 <div class="summarization">
-                    <div class="abstract">
+                    <div class="abstract" inert>
                         <h2> Abstract </h2>
                         <p>
                             The Asch conformity experiments, conducted by Solomon Asch in the 1950s, explored the impact of social 
@@ -103,7 +103,7 @@
                     </div>
                     <div class="sample_summary"> 
                         <h2> Summary </h2>
-                        <textarea id="summaryTwoInput" rows="6" cols="180" class="input_summary"></textarea>
+                        <textarea id="summaryTwoInput" rows="6" cols="180" class="input_summary"  onselectstart="return false" onPaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off></textarea>
                     </div>
                 </div>
                 
@@ -119,6 +119,13 @@
             function openInfo() {document.getElementById("info_bar").style.width = "500px";}
 
             function closeInfo() {document.getElementById("info_bar").style.width = "0";} 
+        </script>
+
+        <script>
+            document.addEventListener("copy", function(e) {e.preventDefault();});
+            document.addEventListener("paste", function(e) {e.preventDefault();});
+            document.addEventListener("cut", function(e) {e.preventDefault();});
+            document.addEventListener("contextmenu", function(e) {e.preventDefault();});
         </script>
     </body>
 </html>
