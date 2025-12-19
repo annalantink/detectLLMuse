@@ -1,6 +1,5 @@
 var WPM_THRESHOLD = 45;
 var WPM_LOG_INTERVAL = 1000;
-var WPM_LOG_COOLDOWN = 10000;
 var THROTTLE = 200;
 
 var DEBUG_WPM_LOG = false; // [DEBUG] logs WPM in the console if enabled
@@ -32,7 +31,6 @@ function initTextarea(el) {
     var started = false;
     var startTs = null; // starting timestamp
     var lastUpdate = 0; 
-    var lastLoggedTs = 0;
     var updaterInterval = null;
     var debugInterval = null;
     var thresholdCounter = null; // how long WPM >= threshold
@@ -51,10 +49,8 @@ function initTextarea(el) {
             if (thresholdCounter === null) thresholdCounter = nowTs;
 
             if ((nowTs - thresholdCounter) >= WPM_SUSTAIN_MS) {
-                if (nowTs - lastLoggedTs > WPM_LOG_COOLDOWN) {
-                    console.log('[WPM Detector] High WPM detected:', metrics);
-                    lastLoggedTs = nowTs;
-                }
+                console.log('[WPM Detector] High WPM detected:', metrics);
+                thresholdCounter = null; // reset after logging
             }
         } else {
             // reset the sustain timer once WPM drops below threshold
