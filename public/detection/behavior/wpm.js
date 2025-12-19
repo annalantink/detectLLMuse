@@ -3,7 +3,7 @@ var WPM_LOG_INTERVAL = 1000;
 var WPM_LOG_COOLDOWN = 10000;
 var THROTTLE = 200;
 
-var DEBUG_WPM_LOG = true; // [DEBUG] logs WPM in the console if enabled
+var DEBUG_WPM_LOG = false; // [DEBUG] logs WPM in the console if enabled
 var DEBUG_LOG_INTERVAL = 1000;
 
 var WPM_SUSTAIN_MS = 10000; // 45 WPM must be sustained for 10s
