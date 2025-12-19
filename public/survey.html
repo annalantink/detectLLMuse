@@ -11,7 +11,7 @@
     <body>
         <div class="container">
             <div class="sidebar_container">
-                <div style="height: 100vh;" class="sidebar">
+                <div style="height: 160vh;" class="sidebar">
                     <div class="line"></div>
                     <div>
                         <p class="inactive">1</p>
@@ -75,55 +75,269 @@
 
                 <h1>Survey</h1>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                    Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                    We are interested in understanding whether you used any large language models, such as ChatGPT, Gemini, or similar, for our tasks and how 
+                    your experience was. Please note that LLM usage was not forbidden, and will not impact your compensation. If you used an LLM, we would 
+                    appreciate your honest responses.
                 </p>
-                <div class="summarization">
+                <div style="min-width: 1000px" class="summarization">
                     <div>
                         <form>
                             <p>
-                                1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                                1. How familiar are you with LLMs?
                             </p>
-                            <div class="radio_list">
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 1</label>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                    <div>
+                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
+                                        <label>Very unfamiliar</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
+                                        <label>Somewhat unfamiliar</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
+                                        <label>Neutral</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
+                                        <label>Somewhat familiar</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
+                                        <label>Very familiar</label>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 2</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 3</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 4</label>
-                                </div>
-                                <div>
-                                    <input type="radio"> <!-- Need to add id to connect to labels -->
-                                    <label>Example 5</label>
-                                </div>
-                            </div>
+                            </fieldset>
+
                             <p>
-                                2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                                2. How often do you use LLMs? 
                             </p>
-                            <textarea rows="3" cols="180" class="survey_textarea"></textarea>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                    <div>
+                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
+                                        <label>Every day</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
+                                        <label>A few times a week</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
+                                        <label>A few times a month</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
+                                        <label>Only a couple times</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
+                                        <label>Never</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
                             <p>
-                                3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                                3. What tasks do you usually use LLMs for?
                             </p>
                             <textarea rows="3" cols="180" class="survey_textarea"></textarea>
 
                             <p>
-                                4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in ex. 
-                                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                                4. Did you use LLMs for the summarization task one?
                             </p>
-                            <textarea rows="3" cols="180" class="survey_textarea"></textarea>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                    <div>
+                                        <input type="radio" name="use_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="use_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>No</label>
+                                    </div>
+                                </div>
+                            </fieldset>
 
+                            <p>
+                                5. If yes, how difficult was it to use LLMs for task one?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
+                                    <div>
+                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Not applicable</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Very difficult</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Somewhat difficult</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Neutral</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Somewhat easy</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
+                                        <label>Very easy</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                6. Did you use LLMs for the summarization task two?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                    <div>
+                                        <input type="radio" name="use_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="use_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>No</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                7. If yes, how difficult was it to use LLMs for task two?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
+                                    <div>
+                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Not applicable</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Very difficult</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Somewhat difficult</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Neutral</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Somewhat easy</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
+                                        <label>Very easy</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                8. Did you think disabling copy/paste made LLM usage inconvenient for you?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 16.2% auto;">
+                                    <div>
+                                        <input type="radio" name="disable_cp"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="disable_cp"> <!-- Need to add id to connect to labels -->
+                                        <label>No</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="disable_cp"> <!-- Need to add id to connect to labels -->
+                                        <label>I didn't use LLMs</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                9. Did you switch tabs/windows during either of the tasks and was it to use an LLM?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                    <div>
+                                        <input type="radio" name="tab_switch"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes, I switched tabs/windows to use an LLM</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="tab_switch"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes, but not to use an LLM</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="tab_switch"> <!-- Need to add id to connect to labels -->
+                                        <label>No, I didn't switch tabs/windows</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                10. Did you face any pop-ups warning you not to use LLMs during Task 2?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                    <div>
+                                        <input type="radio" name="did_popup"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="did_popup"> <!-- Need to add id to connect to labels -->
+                                        <label>No</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                11. Did the pop-ups appear when you were utilizing an LLM for your summary?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% auto;">
+                                    <div>
+                                        <input type="radio" name="popup_accurate"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="popup_accurate"> <!-- Need to add id to connect to labels -->
+                                        <label>No</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="popup_accurate"> <!-- Need to add id to connect to labels -->
+                                        <label>I didn't see any pop-ups</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <p>
+                                12. If yes, did the pop-up deter or discourage you from using an LLM?
+                            </p>
+                            <fieldset>
+                                <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% 25% auto;">
+                                    <div>
+                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
+                                        <label>Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
+                                        <label>No</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
+                                        <label>The pop-ups were inaccurate</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
+                                        <label>I didn't see any pop-ups</label>
+                                    </div>
+                                </div>
+                            </fieldset>
                             
                         </form>
                     </div>

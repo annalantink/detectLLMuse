@@ -2,12 +2,11 @@ form {
     width: 100%;
     padding-top: 9px;
     padding-bottom: 9px;
-    min-width: 630px;
+    min-width: 1000px;
 }
 
 .radio_list {
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
     margin-left: 5%;
 }
 
@@ -15,4 +14,8 @@ form {
     width: 100%;
     resize: none;
     font-size: 15px;
+}
+
+fieldset{
+    border:none;
 }
