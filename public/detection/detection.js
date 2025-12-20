@@ -1,4 +1,5 @@
-function showPopup() {
+function showPopup(reason) {
+  console.log("Triggering popup due to:", reason);
   document.getElementById("detectionModal").style.display = "block";
 }
 
@@ -29,7 +30,7 @@ function setupDetection(textareaId, taskName) {
       const result = await response.json();
       
       if (result.similarity >= 0.9) {
-          showPopup();
+          showPopup("High cosine similarity detected");
       }
 
     } catch (err) {
