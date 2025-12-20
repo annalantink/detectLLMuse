@@ -106,6 +106,16 @@
                 </div>
                 
                 <a href="/summarize_two"><button class="next_button">Next Page</button></a>
+
+                <div id="detectionModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close-modal" onclick="closePopup()">&times;</span>
+                      <h2>A Quick Reminder</h2>
+                      <p>We noticed your summary is very similar to existing AI-generated patterns.</p>
+                      <p>While AI tools are allowed, our research values your own words and ideas more highly. You may revise if you wish.</p>
+                      <button class="modal-button" onclick="closePopup()">Continue Writing</button>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="detection/detection.js"></script>
