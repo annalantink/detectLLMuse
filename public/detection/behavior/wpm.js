@@ -14,6 +14,16 @@ function showPopup(reason) {
   WPM_MODAL_OPEN = true;
 
   console.log("Triggering popup due to:", reason);
+
+  // defocus the text-area
+  try {
+    var active = document.activeElement;
+    if (active && active.classList && active.classList.contains("input_summary")) {
+      window.WPM_DETECTOR._prevFocus = active;
+      active.blur();
+    }
+  } catch (e) {}
+
   document.getElementById("detectionModal").style.display = "block";
 
   // pause all detectors
@@ -23,6 +33,7 @@ function showPopup(reason) {
 function closePopup() {
   document.getElementById("detectionModal").style.display = "none";
   WPM_MODAL_OPEN = false; // release flag
+  console.log("Pop-up closed, resuming detection.");
 
   // reset all metrics when closing pop-up
   window.WPM_DETECTOR.resetAll();
