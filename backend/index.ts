@@ -27,6 +27,14 @@ interface ResponsePayload {
     question2?: string,
     question3?: string,
     question4?: string,
+    question5?: string,
+    question6?: string,
+    question7?: string,
+    question8?: string,
+    question9?: string,
+    question10?: string,
+    question11?: string,
+    question12?: string,
 }
 
 const server = Bun.serve({
@@ -47,7 +55,15 @@ const server = Bun.serve({
                         question1,
                         question2,
                         question3,
-                        question4, } = body;
+                        question4,
+                        question5,
+                        question6,
+                        question7,
+                        question8,
+                        question9,
+                        question10,
+                        question11,
+                        question12 } = body;
                     if (!worker_number || !task) {
                         return Response.json(
                             { error: "Missing: worker_number, task" },
@@ -61,7 +77,23 @@ const server = Bun.serve({
                         if (task == "survey") {
                             await postgres`
                                 INSERT INTO survey 
-                                (worker_number, number_popups, question_1, question_2, question_3, question_4, created_at)
+                                (
+                                    worker_number, 
+                                    number_popups, 
+                                    question_1, 
+                                    question_2, 
+                                    question_3, 
+                                    question_4, 
+                                    question_5, 
+                                    question_6, 
+                                    question_7, 
+                                    question_8, 
+                                    question_9, 
+                                    question_10, 
+                                    question_11, 
+                                    question_12, 
+                                    created_at
+                                )
                                 VALUES (
                                     ${worker_number}, 
                                     ${number_popups}, 
@@ -69,6 +101,14 @@ const server = Bun.serve({
                                     ${question2}, 
                                     ${question3}, 
                                     ${question4}, 
+                                    ${question5}, 
+                                    ${question6}, 
+                                    ${question7}, 
+                                    ${question8}, 
+                                    ${question9}, 
+                                    ${question10}, 
+                                    ${question11}, 
+                                    ${question12}, 
                                     NOW()
                                 )
                             `;

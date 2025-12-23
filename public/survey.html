@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/survey.css">
+    <link rel="stylesheet" href="styles/info_bar.css">
     <title>Abstract Summarization</title>
 </head>
 
 <body>
     <div class="container">
         <div class="sidebar_container">
-            <div style="height: 100vh;" class="sidebar">
+            <div style="height: 160vh;" class="sidebar">
                 <div class="line"></div>
                 <div>
                     <p class="inactive">1</p>
@@ -23,103 +24,321 @@
                 </div>
             </div>
         </div>
-        <div style="margin-top: 20px;" class="container_body">
+        <div style="margin-top: 40px;" class="container_body">
+            <button class="info_button" onclick="openInfo()">?</button>
+            <div class="info_bar" id="info_bar">
+                <a href="javascript:void(0)" class="close_info" onclick="closeInfo()">&times;</a>
+                <div style="font-size: 12px;" class="info_text">
+                    <h2>Task Description</h2>
+                    <p>
+                        You are participating in a research study that evaluates summaries of research abstracts.
+                        This study is being done by a research group consisting of masters students from the TU Delft.
+                        The purpose of this research study is about identifying characteristics of, and patterns in, the summarization
+                        of research abstracts.
+                    </p>
+                    </div>
+            </div>
+
             <h1>Survey</h1>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat fringilla at in
-                ex.
-                Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
+                We are interested in understanding whether you used any large language models, such as ChatGPT, Gemini,
+                or similar, for our tasks and how your experience was. Please note that LLM usage was not forbidden, and will not impact your
+                compensation. If you used an LLM, we would appreciate your honest responses.
             </p>
-            <div class="summarization">
+            <div style="min-width: 1000px" class="summarization">
                 <div>
                     <form id="surveyForm">
-                        <p>
-                            1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
-                            fringilla at in ex.
-                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                        </p>
-                        <div class="radio_list">
-                            <div>
-                                <input type="radio" id="q1_option1" name="question1" value="Example 1" required>
-                                <label for="q1_option1">Example 1</label>
+                        <p>1. How familiar are you with LLMs?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                <div>
+                                    <input type="radio" name="familiarity" id="q1_option1" value="Very unfamiliar">
+                                    <label for="q1_option1">Very unfamiliar</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="familiarity" id="q1_option2" value="Somewhat unfamiliar">
+                                    <label for="q1_option2">Somewhat unfamiliar</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="familiarity" id="q1_option3" value="Neutral">
+                                    <label for="q1_option3">Neutral</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="familiarity" id="q1_option4" value="Somewhat familiar">
+                                    <label for="q1_option4">Somewhat familiar</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="familiarity" id="q1_option5" value="Very familiar">
+                                    <label for="q1_option5">Very familiar</label>
+                                </div>
                             </div>
-                            <div>
-                                <input type="radio" id="q1_option2" name="question1" value="Example 2">
-                                <label for="q1_option2">Example 2</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="q1_option3" name="question1" value="Example 3">
-                                <label for="q1_option3">Example 3</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="q1_option4" name="question1" value="Example 4">
-                                <label for="q1_option4">Example 4</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="q1_option5" name="question1" value="Example 5">
-                                <label for="q1_option5">Example 5</label>
-                            </div>
-                        </div>
-                        <p>
-                            2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
-                            fringilla at in ex.
-                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                        </p>
-                        <textarea rows="3" cols="180" class="survey_textarea" id="question2_text"></textarea>
-                        <p>
-                            3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
-                            fringilla at in ex.
-                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                        </p>
-                        <textarea rows="3" cols="180" class="survey_textarea" id="question3_text"></textarea>
+                        </fieldset>
 
-                        <p>
-                            4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut nisl a metus volutpat
-                            fringilla at in ex.
-                            Integer et elementum metus. In leo ante, dapibus eu quam a, volutpat tincidunt nunc.
-                        </p>
-                        <textarea rows="3" cols="180" class="survey_textarea" id="question4_text"></textarea>
+                        <p>2. How often do you use LLMs?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                <div>
+                                    <input type="radio" name="frequency" id="q2_option1" value="Every day">
+                                    <label for="q2_option1">Every day</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="frequency" id="q2_option2" value="A few times a week">
+                                    <label for="q2_option2">A few times a week</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="frequency" id="q2_option3" value="A few times a month">
+                                    <label for="q2_option3">A few times a month</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="frequency" id="q2_option4" value="Only a couple times">
+                                    <label for="q2_option4">Only a couple times</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="frequency" id="q2_option5" value="Never">
+                                    <label for="q2_option5">Never</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>3. What tasks do you usually use LLMs for?</p>
+                        <textarea rows="3" cols="180" class="survey_textarea" id="q3_text"></textarea>
+
+                        <p>4. Did you use LLMs for the summarization task one?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                <div>
+                                    <input type="radio" name="use_task1" id="q4_yes" value="Yes">
+                                    <label for="q4_yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="use_task1" id="q4_no" value="No">
+                                    <label for="q4_no">No</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>5. If yes, how difficult was it to use LLMs for task one?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
+                                <div>
+                                    <input type="radio" name="difficulty_task1" id="q5_na" value="Not applicable">
+                                    <label for="q5_na">Not applicable</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task1" id="q5_hard" value="Very difficult">
+                                    <label for="q5_hard">Very difficult</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task1" id="q5_somewhat_hard" value="Somewhat difficult">
+                                    <label for="q5_somewhat_hard">Somewhat difficult</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task1" id="q5_neutral" value="Neutral">
+                                    <label for="q5_neutral">Neutral</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task1" id="q5_somewhat_easy" value="Somewhat easy">
+                                    <label for="q5_somewhat_easy">Somewhat easy</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task1" id="q5_easy" value="Very easy">
+                                    <label for="q5_easy">Very easy</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>6. Did you use LLMs for the summarization task two?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                <div>
+                                    <input type="radio" name="use_task2" id="q6_yes" value="Yes">
+                                    <label for="q6_yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="use_task2" id="q6_no" value="No">
+                                    <label for="q6_no">No</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>7. If yes, how difficult was it to use LLMs for task two?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
+                                <div>
+                                    <input type="radio" name="difficulty_task2" id="q7_na" value="Not applicable">
+                                    <label for="q7_na">Not applicable</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task2" id="q7_hard" value="Very difficult">
+                                    <label for="q7_hard">Very difficult</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task2" id="q7_somewhat_hard" value="Somewhat difficult">
+                                    <label for="q7_somewhat_hard">Somewhat difficult</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task2" id="q7_neutral" value="Neutral">
+                                    <label for="q7_neutral">Neutral</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task2" id="q7_somewhat_easy" value="Somewhat easy">
+                                    <label for="q7_somewhat_easy">Somewhat easy</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="difficulty_task2" id="q7_easy" value="Very easy">
+                                    <label for="q7_easy">Very easy</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>8. Did you think disabling copy/paste made LLM usage inconvenient for you?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 16.2% auto;">
+                                <div>
+                                    <input type="radio" name="disable_cp" id="q8_yes" value="Yes">
+                                    <label for="q8_yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="disable_cp" id="q8_no" value="No">
+                                    <label for="q8_no">No</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="disable_cp" id="q8_unused" value="I didn't use LLMs">
+                                    <label for="q8_unused">I didn't use LLMs</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>9. Did you switch tabs/windows during either of the tasks and was it to use an LLM?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                <div>
+                                    <input type="radio" name="tab_switch" id="q9_yes_llm" value="Yes, I switched tabs/windows to use an LLM">
+                                    <label for="q9_yes_llm">Yes, I switched tabs/windows to use an LLM</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="tab_switch" id="q9_yes_other" value="Yes, but not to use an LLM">
+                                    <label for="q9_yes_other">Yes, but not to use an LLM</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="tab_switch" id="q9_no" value="No, I didn't switch tabs/windows">
+                                    <label for="q9_no">No, I didn't switch tabs/windows</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>10. Did you face any pop-ups warning you not to use LLMs during Task 2?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                <div>
+                                    <input type="radio" name="did_popup" id="q10_yes" value="Yes">
+                                    <label for="q10_yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="did_popup" id="q10_no" value="No">
+                                    <label for="q10_no">No</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>11. Did the pop-ups appear when you were utilizing an LLM for your summary?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% auto;">
+                                <div>
+                                    <input type="radio" name="popup_accurate" id="q11_yes" value="Yes">
+                                    <label for="q11_yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="popup_accurate" id="q11_no" value="No">
+                                    <label for="q11_no">No</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="popup_accurate" id="q11_na" value="I didn't see any pop-ups">
+                                    <label for="q11_na">I didn't see any pop-ups</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p>12. If yes, did the pop-up deter or discourage you from using an LLM?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% 25% auto;">
+                                <div>
+                                    <input type="radio" name="popup_discourage" id="q12_yes" value="Yes">
+                                    <label for="q12_yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="popup_discourage" id="q12_no" value="No">
+                                    <label for="q12_no">No</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="popup_discourage" id="q12_inaccurate" value="The pop-ups were inaccurate">
+                                    <label for="q12_inaccurate">The pop-ups were inaccurate</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="popup_discourage" id="q12_na" value="I didn't see any pop-ups">
+                                    <label for="q12_na">I didn't see any pop-ups</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
                     </form>
                 </div>
             </div>
-            <div class="button_container">
-                <!-- <div>
-                        <a href="/summarize_two"><button class="prev_button">Previous Page</button></a>
-                    </div> -->
-                <div>
-                    <a href="#"><button class="next_button" onclick="submitResponse()">Submit</button></a>
-                </div>
-            </div>
+            <a href="javascript:void(0)"><button class="next_button" onclick="submitResponse()">Next Page</button></a>
         </div>
     </div>
-</body>
-<script>
-    function submitResponse() {
-        const q1Radio = document.querySelector('input[name="question1"]:checked');
-        const q1Response = q1Radio ? q1Radio.value : '';
 
-        const q2Response = document.getElementById('question2_text').value;
-        const q3Response = document.getElementById('question3_text').value;
-        const q4Response = document.getElementById('question4_text').value;
-        const responseData = {
-            "worker_number": Number(sessionStorage.getItem('workerNumber')),
-            "task": "survey",
-            "number_popups": 7, // TODO
-            "question1": q1Response,
-            "question2": q2Response,
-            "question3": q3Response,
-            "question4": q4Response
-        };
+    <script>
+        // Helper function to get value of checked radio button by name
+        function getRadioValue(name) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            return selected ? selected.value : null; // returns null if nothing selected
+        }
 
-        const postUrl = "http://localhost:8080/api/response/add";
+        function submitResponse() {
+            // Collecting Data for all 12 questions
+            const q1 = getRadioValue('familiarity');
+            const q2 = getRadioValue('frequency');
+            const q3 = document.getElementById('q3_text').value;
+            const q4 = getRadioValue('use_task1');
+            const q5 = getRadioValue('difficulty_task1');
+            const q6 = getRadioValue('use_task2');
+            const q7 = getRadioValue('difficulty_task2');
+            const q8 = getRadioValue('disable_cp');
+            const q9 = getRadioValue('tab_switch');
+            const q10 = getRadioValue('did_popup');
+            const q11 = getRadioValue('popup_accurate');
+            const q12 = getRadioValue('popup_discourage');
 
-        fetch(postUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(responseData),
-        })
+            const responseData = {
+                "worker_number": Number(sessionStorage.getItem('workerNumber')),
+                "task": "survey",
+                "number_popups": 7,
+                "question1": q1,
+                "question2": q2,
+                "question3": q3,
+                "question4": q4,
+                "question5": q5,
+                "question6": q6,
+                "question7": q7,
+                "question8": q8,
+                "question9": q9,
+                "question10": q10,
+                "question11": q11,
+                "question12": q12
+            };
+
+            console.log("Submitting data:", responseData);
+
+            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+
+            fetch(postUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(responseData),
+            })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok: ' + response.statusText);
@@ -128,12 +347,18 @@
             })
             .then(data => {
                 console.log('Success:', data);
+                // Redirect logic here if needed, e.g.:
+                // window.location.href = "/prolific-redirect"; 
             })
             .catch((error) => {
                 console.error('Error submitting form:', error);
                 alert('An error occurred during submission. Please try again.');
             });
-    }
-</script>
+        }
+
+        function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
+        function closeInfo() { document.getElementById("info_bar").style.width = "0"; }
+    </script>
+</body>
 
 </html>
