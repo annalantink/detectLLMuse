@@ -33,7 +33,7 @@ app.get("/survey", (req, res) => {
 });
 
 
-app.post("/detect", async (req, res) => {
+app.post("/detect_content", async (req, res) => {
   const { text, task } = req.body;
 
   if (!text || text.length < 100) {
