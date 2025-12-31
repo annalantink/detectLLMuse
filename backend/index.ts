@@ -156,15 +156,33 @@ const server = Bun.serve({
         // Get responses from a task or survey.
         "/api/response/get/:task": {
             GET: async (req) => {
+                const apiKey = req.headers.get("api_key");
+
+                if (!apiKey || apiKey !== Bun.env.API_KEY) {
+                    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+                        status: 401,
+                        headers: CORS_HEADERS
+                    });
+                }
+
                 const taskName = req.params.task;
+
                 if (!ALLOWED_TABLES.includes(taskName)) {
-                    return new Response(JSON.stringify({ error: "Invalid task name" }), { status: 403, headers: CORS_HEADERS });
+                    return new Response(JSON.stringify({ error: "Invalid task name" }), {
+                        status: 403,
+                        headers: CORS_HEADERS
+                    });
                 }
+
                 if (postgres != null) {
-                    let data = await postgres`SELECT * FROM ${postgres(taskName)}`
-                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS })
+                    let data = await postgres`SELECT * FROM ${postgres(taskName)}`;
+                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS });
                 }
-                return Response.json({ status: 400, headers: CORS_HEADERS })
+
+                return new Response(JSON.stringify({ error: "Database connection failed" }), {
+                    status: 500,
+                    headers: CORS_HEADERS
+                });
             }
         },
 
