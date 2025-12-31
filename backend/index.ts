@@ -156,8 +156,8 @@ const server = Bun.serve({
         // Get responses from a task or survey.
         "/api/response/get/:task": {
             GET: async (req) => {
-                const apiKey = req.headers.get("api_key");
-
+                const url = new URL(req.url);
+                const apiKey = url.searchParams.get("key");
                 if (!apiKey || apiKey !== Bun.env.API_KEY) {
                     return new Response(JSON.stringify({ error: "Unauthorized" }), {
                         status: 401,
