@@ -257,6 +257,10 @@
     </div>
 
     <script>
+        function getRadioValue(name) {
+            const element = document.querySelector(`input[name="${name}"]:checked`);
+            return element ? element.value : "No response";
+        }
         function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
 
         function closeInfo() { document.getElementById("info_bar").style.width = "0"; }
