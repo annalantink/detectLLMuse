@@ -1,4 +1,4 @@
-const WINDOW_MS = 10000; // time window (10 seconds)
+const WINDOW_MS = 15000; // time window (10 seconds)
 const MAX_PAUSE_MS = 1000; // max allowed pause (1 second)
 
 // === PAUSE DETECTION ===
