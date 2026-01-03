@@ -1,75 +1,105 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="styles/style.css">
-        <title>Abstract Summarization</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="sidebar">
-                <div class="line"></div>
-                <div>
-                    <p class="active">1</p>
-                    <p class="inactive">2</p>
-                    <p class="inactive">3</p>
-                    <p class="inactive">4</p>
-                    <p class="inactive">5</p>
-                </div>
-            </div>
-            <div style="margin-top: 60px;" class="container_body">
-                <!-- If this opening statement is changed, then it also needs to be changed in the info bars -->
-                <h1>Opening Statement</h1>
-                <h2>Task Description</h2>
-                <p> 
-                    You are being invited to participate in a research study that evaluates summaries of research abstracts. 
-                    This study is being done by a research group consisting of masters students from the TU Delft. The purpose of 
-                    this research study is about identifying characteristics of, and patterns in, the summarization of research abstracts. 
-                    This assignment will take you approximately 15 minutes to complete. The data will be used for a project for the Crowd 
-                    Computing course provided by the TU Delft, and will be included in a report and presentation submitted for the course.
-                </p>
-                <p>
-                    For this assignment, we ask you to first read an example of an abstract and its corresponding summary. Next, you will 
-                    be asked to complete two abstract summarization tasks. For these tasks, you will be provided an abstract which you 
-                    should summarize in the text box below it. The abstracts are approximately 120-170 words in length, and the <b>summaries should</b>
-                    <b>be roughly 2-4 sentences in length.</b> We provide the citation for each abstract as well, but the citations are not relevant for your summary. 
-                    You do not need expertise in any subject to complete these summarization tasks. On the fifth and final page, you will be asked to 
-                    complete a survey about your experience with writing the summaries. Once the survey is complete, you can click "Submit" and you will 
-                    be redirected to Prolific. 
-                </p>
-                <p>
-                    Please note that this interface does not have back buttons, and <b>we ask you to not go back to previous pages when completing </b>
-                    <b>this assignment</b>. This opening statement can be read in later parts of the assignment by clicking the "?" button.
-                </p>
-                <p>
-                    For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
-                </p>
-                <p>
-                    <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task. That said, the purpose of this 
-                    study is to understand human reasoning and expression. For this reason, answers written mostly in your own words and ideas 
-                    are much more valuable to us than answers that closely resemble typical AI outputs.
-                </p>
-                <p>
-                    If you complete this assignment, meaning you write a summary for each of the two provided abstracts, you will be financially compensated 
-                    with XX$.
-                </p>
 
-                <h2>Consent and Participant Information</h2>
-                <p>
-                    As with any online activity the risk of a breach is always possible. To the best of our ability your answers in this study 
-                    will remain confidential. We will minimize any risks by anonymizing the data that we collect. We will only store the summaries 
-                    you write, and behavioral data that is tracked as you write the summaries (e.g. how long it takes to complete a summary, typing 
-                    speed, etc.). None of the data will be personally identifying. Your Prolific ID will be tracked but not stored, to manage 
-                    integration with the Prolific website. The data will be stored in a database provided by Render.com.
-                </p>
-                <p>
-                    <b>Once you click the "Next Page" button, you consent to participating in this research.</b> Do to the anonymity of the data, 
-                    your data <b>cannot</b> be removed once you have consented to participating.
-                </p>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Abstract Summarization</title>
+</head>
 
-                <a href="/example_summary"><button class="next_button">Next Page</button></a>
+<body>
+    <script>
+        sessionStorage.setItem('number_popups', 0);
+        const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
+        fetch(BACKEND)
+            .then((response) => {
+            })
+    </script>
+    <div class="container">
+        <div class="sidebar">
+            <div class="line"></div>
+            <div>
+                <p class="active">1</p>
+                <p class="inactive">2</p>
+                <p class="inactive">3</p>
+                <p class="inactive">4</p>
+                <p class="inactive">5</p>
             </div>
         </div>
-    </body>
+        <div style="margin-top: 60px;" class="container_body">
+            <!-- If this opening statement is changed, then it also needs to be changed in the info bars -->
+            <h1>Opening Statement</h1>
+            <h2>Task Description</h2>
+            <p>
+                You are being invited to participate in a research study that evaluates summaries of research abstracts.
+                This study is being done by a research group consisting of masters students from the TU Delft. The
+                purpose of
+                this research study is about identifying characteristics of, and patterns in, the summarization of
+                research abstracts.
+                This assignment will take you approximately 15 minutes to complete. The data will be used for a project
+                for the Crowd
+                Computing course provided by the TU Delft, and will be included in a report and presentation submitted
+                for the course.
+            </p>
+            <p>
+                For this assignment, we ask you to first read an example of an abstract and its corresponding summary.
+                Next, you will
+                be asked to complete two abstract summarization tasks. For these tasks, you will be provided an abstract
+                which you
+                should summarize in the text box below it. The abstracts are approximately 120-170 words in length, and
+                the <b>summaries should</b>
+                <b>be roughly 2-4 sentences in length.</b> We provide the citation for each abstract as well, but the
+                citations are not relevant for your summary.
+                You do not need expertise in any subject to complete these summarization tasks. On the fifth and final
+                page, you will be asked to
+                complete a survey about your experience with writing the summaries. Once the survey is complete, you can
+                click "Submit" and you will
+                be redirected to Prolific.
+            </p>
+            <p>
+                Please note that this interface does not have back buttons, and <b>we ask you to not go back to previous
+                    pages when completing </b>
+                <b>this assignment</b>. This opening statement can be read in later parts of the assignment by clicking
+                the "?" button.
+            </p>
+            <p>
+                For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
+            </p>
+            <p>
+                <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task. That
+                said, the purpose of this
+                study is to understand human reasoning and expression. For this reason, answers written mostly in your
+                own words and ideas
+                are much more valuable to us than answers that closely resemble typical AI outputs.
+            </p>
+            <p>
+                If you complete this assignment, meaning you write a summary for each of the two provided abstracts, you
+                will be financially compensated
+                with XX$.
+            </p>
+
+            <h2>Consent and Participant Information</h2>
+            <p>
+                As with any online activity the risk of a breach is always possible. To the best of our ability your
+                answers in this study
+                will remain confidential. We will minimize any risks by anonymizing the data that we collect. We will
+                only store the summaries
+                you write, and behavioral data that is tracked as you write the summaries (e.g. how long it takes to
+                complete a summary, typing
+                speed, etc.). None of the data will be personally identifying. Your Prolific ID will be tracked but not
+                stored, to manage
+                integration with the Prolific website. The data will be stored in a database provided by Render.com.
+            </p>
+            <p>
+                <b>Once you click the "Next Page" button, you consent to participating in this research.</b> Do to the
+                anonymity of the data,
+                your data <b>cannot</b> be removed once you have consented to participating.
+            </p>
+
+            <a href="/example_summary"><button class="next_button">Next Page</button></a>
+        </div>
+    </div>
+</body>
+
 </html>

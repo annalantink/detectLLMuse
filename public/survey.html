@@ -1,358 +1,334 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/survey.css">
-        <link rel="stylesheet" href="styles/info_bar.css">
-        <title>Abstract Summarization</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="sidebar_container">
-                <div style="height: 160vh;" class="sidebar">
-                    <div class="line"></div>
-                    <div>
-                        <p class="inactive">1</p>
-                        <p class="inactive">2</p>
-                        <p class="inactive">3</p>
-                        <p class="inactive">4</p>
-                        <p class="active">5</p>
-                    </div>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/survey.css">
+    <link rel="stylesheet" href="styles/info_bar.css">
+    <title>Abstract Summarization</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar_container">
+            <div style="height: 160vh;" class="sidebar">
+                <div class="line"></div>
+                <div>
+                    <p class="inactive">1</p>
+                    <p class="inactive">2</p>
+                    <p class="inactive">3</p>
+                    <p class="inactive">4</p>
+                    <p class="active">5</p>
                 </div>
-            </div>
-            <div style="margin-top: 40px;" class="container_body">
-                <button class="info_button" onclick="openInfo()">?</button>
-                <div class="info_bar" id="info_bar">
-                    <a href="javascript:void(0)" class="close_info" onclick="closeInfo()">&times;</a>
-                    <div style="font-size: 12px;" class="info_text">
-                        <h2>Task Description</h2>
-                        <p> 
-                            You are participating in a research study that evaluates summaries of research abstracts. 
-                            This study is being done by a research group consisting of masters students from the TU Delft. The purpose of 
-                            this research study is about identifying characteristics of, and patterns in, the summarization of research abstracts. 
-                            This assignment will take you approximately 15 minutes to complete. The data will be used for a project for the Crowd 
-                            Computing course provided by the TU Delft, and will be included in a report and presentation submitted for the course.
-                        </p>
-                        <p>
-                            For this assignment, we ask you to first read an example of an abstract and its corresponding summary. Next, you will 
-                            be asked to complete two abstract summarization tasks. For these tasks, you will be provided an abstract which you 
-                            should summarize in the text box below it. The abstracts are approximately 120-170 words in length, and the <b>summaries should</b>
-                            <b>be roughly 2-4 sentences in length.</b> We provide the citation for each abstract as well, but the citations are not relevant for your summary. 
-                            You do not need expertise in any subject to complete these summarization tasks. On the fifth and final page, you will be asked to 
-                            complete a survey about your experience with writing the summaries. Once the survey is complete, you can click "Submit" and you will 
-                            be redirected to Prolific. 
-                        </p>
-                        <p>
-                            Please note that this interface does not have back buttons, and <b>we ask you to not go back to previous pages when completing </b>
-                            <b>this assignment</b>. This opening statement can be read in later parts of the assignment by clicking the "?" button.
-                        </p>
-                        <p>
-                            For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
-                        </p>
-                        <p>
-                            <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task. That said, the purpose of this 
-                            study is to understand human reasoning and expression. For this reason, answers written mostly in your own words and ideas 
-                            are much more valuable to us than answers that closely resemble typical AI outputs.
-                        </p>
-                        <p>
-                            If you complete this assignment, meaning you write a summary for each of the two provided abstracts, you will be financially compensated 
-                            with XX$.
-                        </p>
-
-                        <h2>Consent and Participant Information</h2>
-                        <p>
-                            As with any online activity the risk of a breach is always possible. To the best of our ability your answers in this study 
-                            will remain confidential. We will minimize any risks by anonymizing the data that we collect. We will only store the summaries 
-                            you write, and behavioral data that is tracked as you write the summaries (e.g. how long it takes to complete a summary, typing 
-                            speed, etc.). None of the data will be personally identifying. Your Prolific ID will be tracked but not stored, to manage 
-                            integration with the Prolific website. The data will be stored in a database provided by Render.com.
-                        </p>
-                        <p>
-                            <b>You have consented to participating in this research.</b> Do to the anonymity of the data, 
-                            your data <b>cannot</b> be removed once you have consented to participating.
-                        </p>
-                    </div>
-                </div>
-
-                <h1>Survey</h1>
-                <p>
-                    We are interested in understanding whether you used any large language models, such as ChatGPT, Gemini, or similar, for our tasks and how 
-                    your experience was. Please note that LLM usage was not forbidden, and will not impact your compensation. If you used an LLM, we would 
-                    appreciate your honest responses.
-                </p>
-                <div style="min-width: 1000px" class="summarization">
-                    <div>
-                        <form>
-                            <p>
-                                1. How familiar are you with LLMs?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
-                                    <div>
-                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
-                                        <label>Very unfamiliar</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
-                                        <label>Somewhat unfamiliar</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
-                                        <label>Neutral</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
-                                        <label>Somewhat familiar</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="familiarity"> <!-- Need to add id to connect to labels -->
-                                        <label>Very familiar</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                2. How often do you use LLMs? 
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
-                                    <div>
-                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
-                                        <label>Every day</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
-                                        <label>A few times a week</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
-                                        <label>A few times a month</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
-                                        <label>Only a couple times</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="frequency"> <!-- Need to add id to connect to labels -->
-                                        <label>Never</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                3. What tasks do you usually use LLMs for?
-                            </p>
-                            <textarea rows="3" cols="180" class="survey_textarea"></textarea>
-
-                            <p>
-                                4. Did you use LLMs for the summarization task one?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
-                                    <div>
-                                        <input type="radio" name="use_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="use_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>No</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                5. If yes, how difficult was it to use LLMs for task one?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
-                                    <div>
-                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Not applicable</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Very difficult</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Somewhat difficult</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Neutral</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Somewhat easy</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task1"> <!-- Need to add id to connect to labels -->
-                                        <label>Very easy</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                6. Did you use LLMs for the summarization task two?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
-                                    <div>
-                                        <input type="radio" name="use_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="use_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>No</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                7. If yes, how difficult was it to use LLMs for task two?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
-                                    <div>
-                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Not applicable</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Very difficult</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Somewhat difficult</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Neutral</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Somewhat easy</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="difficulty_task2"> <!-- Need to add id to connect to labels -->
-                                        <label>Very easy</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                8. Did you think disabling copy/paste made LLM usage inconvenient for you?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 16.2% auto;">
-                                    <div>
-                                        <input type="radio" name="disable_cp"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="disable_cp"> <!-- Need to add id to connect to labels -->
-                                        <label>No</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="disable_cp"> <!-- Need to add id to connect to labels -->
-                                        <label>I didn't use LLMs</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                9. Did you switch tabs/windows during either of the tasks and was it to use an LLM?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
-                                    <div>
-                                        <input type="radio" name="tab_switch"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes, I switched tabs/windows to use an LLM</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="tab_switch"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes, but not to use an LLM</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="tab_switch"> <!-- Need to add id to connect to labels -->
-                                        <label>No, I didn't switch tabs/windows</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                10. Did you face any pop-ups warning you not to use LLMs during Task 2?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
-                                    <div>
-                                        <input type="radio" name="did_popup"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="did_popup"> <!-- Need to add id to connect to labels -->
-                                        <label>No</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                11. Did the pop-ups appear when you were utilizing an LLM for your summary?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% auto;">
-                                    <div>
-                                        <input type="radio" name="popup_accurate"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="popup_accurate"> <!-- Need to add id to connect to labels -->
-                                        <label>No</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="popup_accurate"> <!-- Need to add id to connect to labels -->
-                                        <label>I didn't see any pop-ups</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <p>
-                                12. If yes, did the pop-up deter or discourage you from using an LLM?
-                            </p>
-                            <fieldset>
-                                <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% 25% auto;">
-                                    <div>
-                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
-                                        <label>Yes</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
-                                        <label>No</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
-                                        <label>The pop-ups were inaccurate</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="popup_discourage"> <!-- Need to add id to connect to labels -->
-                                        <label>I didn't see any pop-ups</label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            
-                        </form>
-                    </div>
-                </div>
-                <a href="/"><button class="next_button">Next Page</button></a>
             </div>
         </div>
+        <div style="margin-top: 40px;" class="container_body">
+            <button class="info_button" onclick="openInfo()">?</button>
+            <div class="info_bar" id="info_bar">
+                <a href="javascript:void(0)" class="close_info" onclick="closeInfo()">&times;</a>
+                <div style="font-size: 12px;" class="info_text">
+                    <h2>Task Description</h2>
+                    <p>
+                        You are participating in a research study that evaluates summaries of research abstracts.
+                        This study is being done by a research group consisting of masters students from the TU Delft.
+                        The purpose of
+                        this research study is about identifying characteristics of, and patterns in, the summarization
+                        of research abstracts.
+                        This assignment will take you approximately 15 minutes to complete. The data will be used for a
+                        project for the Crowd
+                        Computing course provided by the TU Delft, and will be included in a report and presentation
+                        submitted for the course.
+                    </p>
+                    <p>
+                        For this assignment, we ask you to first read an example of an abstract and its corresponding
+                        summary. Next, you will
+                        be asked to complete two abstract summarization tasks. For these tasks, you will be provided an
+                        abstract which you
+                        should summarize in the text box below it. The abstracts are approximately 120-170 words in
+                        length, and the <b>summaries should</b>
+                        <b>be roughly 2-4 sentences in length.</b> We provide the citation for each abstract as well,
+                        but the citations are not relevant for your summary.
+                        You do not need expertise in any subject to complete these summarization tasks. On the fifth and
+                        final page, you will be asked to
+                        complete a survey about your experience with writing the summaries. Once the survey is complete,
+                        you can click "Submit" and you will
+                        be redirected to Prolific.
+                    </p>
+                    <p>
+                        Please note that this interface does not have back buttons, and <b>we ask you to not go back to
+                            previous pages when completing </b>
+                        <b>this assignment</b>. This opening statement can be read in later parts of the assignment by
+                        clicking the "?" button.
+                    </p>
+                    <p>
+                        For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
+                    </p>
+                    <p>
+                        <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task.
+                        That said, the purpose of this
+                        study is to understand human reasoning and expression. For this reason, answers written mostly
+                        in your own words and ideas
+                        are much more valuable to us than answers that closely resemble typical AI outputs.
+                    </p>
+                    <p>
+                        If you complete this assignment, meaning you write a summary for each of the two provided
+                        abstracts, you will be financially compensated
+                        with XX$.
+                    </p>
 
-        <script>
-            function openInfo() {document.getElementById("info_bar").style.width = "500px";}
+                    <h2>Consent and Participant Information</h2>
+                    <p>
+                        As with any online activity the risk of a breach is always possible. To the best of our ability
+                        your answers in this study
+                        will remain confidential. We will minimize any risks by anonymizing the data that we collect. We
+                        will only store the summaries
+                        you write, and behavioral data that is tracked as you write the summaries (e.g. how long it
+                        takes to complete a summary, typing
+                        speed, etc.). None of the data will be personally identifying. Your Prolific ID will be tracked
+                        but not stored, to manage
+                        integration with the Prolific website. The data will be stored in a database provided by
+                        Render.com.
+                    </p>
+                    <p>
+                        <b>You have consented to participating in this research.</b> Do to the anonymity of the data,
+                        your data <b>cannot</b> be removed once you have consented to participating.
+                    </p>
+                </div>
+            </div>
 
-            function closeInfo() {document.getElementById("info_bar").style.width = "0";} 
-        </script>
-    </body>
+            <h1>Survey</h1>
+            <p>
+                We are interested in understanding whether you used any large language models, such as ChatGPT, Gemini,
+                or similar, for our tasks and how
+                your experience was. Please note that LLM usage was not forbidden, and will not impact your
+                compensation. If you used an LLM, we would
+                appreciate your honest responses.
+            </p>
+            <div style="min-width: 1000px" class="summarization">
+                <div>
+                    <form id="surveyForm">
+                        <p>1. How familiar are you with LLMs?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                <div><input type="radio" name="familiarity" value="Very unfamiliar"> <label>Very
+                                        unfamiliar</label></div>
+                                <div><input type="radio" name="familiarity" value="Somewhat unfamiliar"> <label>Somewhat
+                                        unfamiliar</label></div>
+                                <div><input type="radio" name="familiarity" value="Neutral"> <label>Neutral</label>
+                                </div>
+                                <div><input type="radio" name="familiarity" value="Somewhat familiar"> <label>Somewhat
+                                        familiar</label></div>
+                                <div><input type="radio" name="familiarity" value="Very familiar"> <label>Very
+                                        familiar</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>2. How often do you use LLMs?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                <div><input type="radio" name="frequency" value="Every day"> <label>Every day</label>
+                                </div>
+                                <div><input type="radio" name="frequency" value="A few times a week"> <label>A few times
+                                        a week</label></div>
+                                <div><input type="radio" name="frequency" value="A few times a month"> <label>A few
+                                        times a month</label></div>
+                                <div><input type="radio" name="frequency" value="Only a couple times"> <label>Only a
+                                        couple times</label></div>
+                                <div><input type="radio" name="frequency" value="Never"> <label>Never</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>3. What tasks do you usually use LLMs for?</p>
+                        <textarea id="q3_text" rows="3" cols="180" class="survey_textarea"></textarea>
+
+                        <p>4. Did you use LLMs for the summarization task one?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                <div><input type="radio" name="use_task1" value="Yes"> <label>Yes</label></div>
+                                <div><input type="radio" name="use_task1" value="No"> <label>No</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>5. If yes, how difficult was it to use LLMs for task one?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
+                                <div><input type="radio" name="difficulty_task1" value="Not applicable"> <label>Not
+                                        applicable</label></div>
+                                <div><input type="radio" name="difficulty_task1" value="Very difficult"> <label>Very
+                                        difficult</label></div>
+                                <div><input type="radio" name="difficulty_task1" value="Somewhat difficult">
+                                    <label>Somewhat difficult</label>
+                                </div>
+                                <div><input type="radio" name="difficulty_task1" value="Neutral"> <label>Neutral</label>
+                                </div>
+                                <div><input type="radio" name="difficulty_task1" value="Somewhat easy"> <label>Somewhat
+                                        easy</label></div>
+                                <div><input type="radio" name="difficulty_task1" value="Very easy"> <label>Very
+                                        easy</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>6. Did you use LLMs for the summarization task two?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                <div><input type="radio" name="use_task2" value="Yes"> <label>Yes</label></div>
+                                <div><input type="radio" name="use_task2" value="No"> <label>No</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>7. If yes, how difficult was it to use LLMs for task two?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto auto;">
+                                <div><input type="radio" name="difficulty_task2" value="Not applicable"> <label>Not
+                                        applicable</label></div>
+                                <div><input type="radio" name="difficulty_task2" value="Very difficult"> <label>Very
+                                        difficult</label></div>
+                                <div><input type="radio" name="difficulty_task2" value="Somewhat difficult">
+                                    <label>Somewhat difficult</label>
+                                </div>
+                                <div><input type="radio" name="difficulty_task2" value="Neutral"> <label>Neutral</label>
+                                </div>
+                                <div><input type="radio" name="difficulty_task2" value="Somewhat easy"> <label>Somewhat
+                                        easy</label></div>
+                                <div><input type="radio" name="difficulty_task2" value="Very easy"> <label>Very
+                                        easy</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>8. Did you think disabling copy/paste made LLM usage inconvenient for you?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 16.2% auto;">
+                                <div><input type="radio" name="disable_cp" value="Yes"> <label>Yes</label></div>
+                                <div><input type="radio" name="disable_cp" value="No"> <label>No</label></div>
+                                <div><input type="radio" name="disable_cp" value="I didn't use LLMs"> <label>I didn't
+                                        use LLMs</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>9. Did you switch tabs/windows during either of the tasks and was it to use an LLM?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: auto auto auto auto auto;">
+                                <div><input type="radio" name="tab_switch" value="Yes, LLM"> <label>Yes, I switched
+                                        tabs/windows to use an LLM</label></div>
+                                <div><input type="radio" name="tab_switch" value="Yes, Other"> <label>Yes, but not to
+                                        use an LLM</label></div>
+                                <div><input type="radio" name="tab_switch" value="No"> <label>No, I didn't switch
+                                        tabs/windows</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>10. Did you face any pop-ups warning you not to use LLMs during Task 2?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.5% 17.5% auto;">
+                                <div><input type="radio" name="did_popup" value="Yes"> <label>Yes</label></div>
+                                <div><input type="radio" name="did_popup" value="No"> <label>No</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>11. Did the pop-ups appear when you were utilizing an LLM for your summary?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% auto;">
+                                <div><input type="radio" name="popup_accurate" value="Yes"> <label>Yes</label></div>
+                                <div><input type="radio" name="popup_accurate" value="No"> <label>No</label></div>
+                                <div><input type="radio" name="popup_accurate" value="No pop-ups"> <label>I didn't see
+                                        any pop-ups</label></div>
+                            </div>
+                        </fieldset>
+
+                        <p>12. If yes, did the pop-up deter or discourage you from using an LLM?</p>
+                        <fieldset>
+                            <div class="radio_list" style="grid-template-columns: 17.6% 16.2% 25% 25% auto;">
+                                <div><input type="radio" name="popup_discourage" value="Yes"> <label>Yes</label></div>
+                                <div><input type="radio" name="popup_discourage" value="No"> <label>No</label></div>
+                                <div><input type="radio" name="popup_discourage" value="Inaccurate"> <label>The pop-ups
+                                        were inaccurate</label></div>
+                                <div><input type="radio" name="popup_discourage" value="No pop-ups"> <label>I didn't see
+                                        any pop-ups</label></div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <button class="next_button" onclick="submitResponse()" style="margin-top: 30px; cursor: pointer;">Submit
+                Response</button>
+        </div>
+    </div>
+
+    <script>
+        function getRadioValue(name) {
+            const element = document.querySelector(`input[name="${name}"]:checked`);
+            return element ? element.value : "No response";
+        }
+        function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
+
+        function closeInfo() { document.getElementById("info_bar").style.width = "0"; }
+
+        function submitResponse() {
+            const q1 = getRadioValue('familiarity');
+            const q2 = getRadioValue('frequency');
+            const q3 = document.getElementById('q3_text').value;
+            const q4 = getRadioValue('use_task1');
+            const q5 = getRadioValue('difficulty_task1');
+            const q6 = getRadioValue('use_task2');
+            const q7 = getRadioValue('difficulty_task2');
+            const q8 = getRadioValue('disable_cp');
+            const q9 = getRadioValue('tab_switch');
+            const q10 = getRadioValue('did_popup');
+            const q11 = getRadioValue('popup_accurate');
+            const q12 = getRadioValue('popup_discourage');
+
+            const workerNum = sessionStorage.getItem('workerNumber');
+            let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+
+            const responseData = {
+                "worker_number": workerNum ? Number(workerNum) : 0,
+                "task": "survey",
+                "number_popups": currentCount,
+                "question1": q1,
+                "question2": q2,
+                "question3": q3,
+                "question4": q4,
+                "question5": q5,
+                "question6": q6,
+                "question7": q7,
+                "question8": q8,
+                "question9": q9,
+                "question10": q10,
+                "question11": q11,
+                "question12": q12
+            };
+
+            console.log("Submitting data:", responseData);
+
+            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+
+            fetch(postUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(responseData),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    // Redirect to final page or Prolific here
+                    // window.location.href = "https://app.prolific.co/submissions/complete?cc=YOURCODE";
+                    alert('Submission successful! You would now be redirected.');
+                })
+                .catch((error) => {
+                    console.error('Error submitting form:', error);
+                    alert('An error occurred during submission. Please try again.');
+                });
+        }
+    </script>
+</body>
+
 </html>

@@ -1,128 +1,222 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/info_bar.css">
-        <title>Abstract Summarization</title>
-    </head>
-    <body id="doc_body">
-        <div class="container">
-            <div class="sidebar_container">
-                <div class="sidebar">
-                    <div class="line"></div>
-                    <div>
-                        <p class="inactive">1</p>
-                        <p class="inactive">2</p>
-                        <p class="active">3</p>
-                        <p class="inactive">4</p>
-                        <p class="inactive">5</p>
-                    </div>
-                </div>
-            </div>
-            <div class="container_body">
-                <button class="info_button" onclick="openInfo()">?</button>
-                <div class="info_bar" id="info_bar">
-                    <a href="javascript:void(0)" class="close_info" onclick="closeInfo()">&times;</a>
-                    <div style="font-size: 12px;" class="info_text">
-                        <h2>Task Description</h2>
-                        <p> 
-                            You are participating in a research study that evaluates summaries of research abstracts. 
-                            This study is being done by a research group consisting of masters students from the TU Delft. The purpose of 
-                            this research study is about identifying characteristics of, and patterns in, the summarization of research abstracts. 
-                            This assignment will take you approximately 15 minutes to complete. The data will be used for a project for the Crowd 
-                            Computing course provided by the TU Delft, and will be included in a report and presentation submitted for the course.
-                        </p>
-                        <p>
-                            For this assignment, we ask you to first read an example of an abstract and its corresponding summary. Next, you will 
-                            be asked to complete two abstract summarization tasks. For these tasks, you will be provided an abstract which you 
-                            should summarize in the text box below it. The abstracts are approximately 120-170 words in length, and the <b>summaries should</b>
-                            <b>be roughly 2-4 sentences in length.</b> We provide the citation for each abstract as well, but the citations are not relevant for your summary. 
-                            You do not need expertise in any subject to complete these summarization tasks. On the fifth and final page, you will be asked to 
-                            complete a survey about your experience with writing the summaries. Once the survey is complete, you can click "Submit" and you will 
-                            be redirected to Prolific. 
-                        </p>
-                        <p>
-                            Please note that this interface does not have back buttons, and <b>we ask you to not go back to previous pages when completing </b>
-                            <b>this assignment</b>. This opening statement can be read in later parts of the assignment by clicking the "?" button.
-                        </p>
-                        <p>
-                            For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
-                        </p>
-                        <p>
-                            <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task. That said, the purpose of this 
-                            study is to understand human reasoning and expression. For this reason, answers written mostly in your own words and ideas 
-                            are much more valuable to us than answers that closely resemble typical AI outputs.
-                        </p>
-                        <p>
-                            If you complete this assignment, meaning you write a summary for each of the two provided abstracts, you will be financially compensated 
-                            with XX$.
-                        </p>
 
-                        <h2>Consent and Participant Information</h2>
-                        <p>
-                            As with any online activity the risk of a breach is always possible. To the best of our ability your answers in this study 
-                            will remain confidential. We will minimize any risks by anonymizing the data that we collect. We will only store the summaries 
-                            you write, and behavioral data that is tracked as you write the summaries (e.g. how long it takes to complete a summary, typing 
-                            speed, etc.). None of the data will be personally identifying. Your Prolific ID will be tracked but not stored, to manage 
-                            integration with the Prolific website. The data will be stored in a database provided by Render.com.
-                        </p>
-                        <p>
-                            <b>You have consented to participating in this research.</b> Do to the anonymity of the data, 
-                            your data <b>cannot</b> be removed once you have consented to participating.
-                        </p>
-                    </div>
-                </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/info_bar.css">
+    <title>Abstract Summarization</title>
+    <script type="text/javascript">
+        window.onload = async function () {
+            try {
+                const response = await fetch("https://detectllmuse-backend.onrender.com/api/worker/number", {
+                    method: 'GET',
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error, status ${response.status}`)
+                }
+                const data = await response.json();
+                const number = data.worker_number;
+                sessionStorage.setItem('workerNumber', number);
+                console.log(`Set number ${sessionStorage.getItem('workerNumber')}`)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    </script>
+</head>
 
-                <h1>Summarization Task 1</h1>
-                <p>
-                    For this page, we provide you an abstract for you to read. After reading the abstract, please summarize the abstract
-                    in the text box. Your summary should be 2-4 sentences in length. Once finished, click 'Next Page'. Note that the reference we 
-                    include is not relevant for your summary, <b>only the provided abstract text should be summarized.</b>
-                </p>
-                <div class="summarization">
-                    <div class="abstract" inert>
-                        <h2> Abstract </h2>
-                        <p>
-                            This research provides evidence that people overestimate the extent to which their actions and appearance 
-                            are noted by others, a phenomenon dubbed the spotlight effect. In Studies 1 and 2, participants who were 
-                            asked to don a T-shirt depicting either a flattering or potentially embarrassing image overestimated the 
-                            number of observers who would be able to recall what was pictured on the shirt. In Study 3, participants 
-                            in a group discussion overestimated how prominent their positive and negative utterances were to their 
-                            fellow discussants. Studies 4 and 5 provide evidence supporting an anchoring-and-adjustment interpretation 
-                            of the spotlight effect. In particular, people appear to anchor on their own rich phenomenological experience 
-                            and then adjust—insufficiently—to take into account the perspective of others. The discussion focuses on the 
-                            manifestations and implications of the spotlight effect across a host of everyday social phenomena.
-                        </p>
-                        <p><b>Reference</b></p>
-                        <p>
-                            T. Gilovich, V. H. Medvec, and K. Savitsky, “The spotlight effect in social judgment: An egocentric bias in estimates 
-                            of the salience of one’s own actions and appearance.,” Journal of Personality and Social Psychology, vol. 78, no. 2, 
-                            pp. 211–222, 2000, doi: 10.1037/0022-3514.78.2.211.
-                        </p>
-                    </div>
-                    <div class="sample_summary"> 
-                        <h2> Summary </h2>
-                        <textarea id="summaryOneInput" rows="6" cols="180" class="input_summary" onselectstart="return false" onPaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off></textarea>
-                    </div>
+<body id="doc_body">
+    <div class="container">
+        <div class="sidebar_container">
+            <div class="sidebar">
+                <div class="line"></div>
+                <div>
+                    <p class="inactive">1</p>
+                    <p class="inactive">2</p>
+                    <p class="active">3</p>
+                    <p class="inactive">4</p>
+                    <p class="inactive">5</p>
                 </div>
-                
-                <a href="/summarize_two"><button class="next_button">Next Page</button></a>
             </div>
         </div>
+        <div class="container_body">
+            <button class="info_button" onclick="openInfo()">?</button>
+            <div class="info_bar" id="info_bar">
+                <a href="javascript:void(0)" class="close_info" onclick="closeInfo()">&times;</a>
+                <div style="font-size: 12px;" class="info_text">
+                    <h2>Task Description</h2>
+                    <p>
+                        You are participating in a research study that evaluates summaries of research abstracts.
+                        This study is being done by a research group consisting of masters students from the TU Delft.
+                        The purpose of
+                        this research study is about identifying characteristics of, and patterns in, the summarization
+                        of research abstracts.
+                        This assignment will take you approximately 15 minutes to complete. The data will be used for a
+                        project for the Crowd
+                        Computing course provided by the TU Delft, and will be included in a report and presentation
+                        submitted for the course.
+                    </p>
+                    <p>
+                        For this assignment, we ask you to first read an example of an abstract and its corresponding
+                        summary. Next, you will
+                        be asked to complete two abstract summarization tasks. For these tasks, you will be provided an
+                        abstract which you
+                        should summarize in the text box below it. The abstracts are approximately 120-170 words in
+                        length, and the <b>summaries should</b>
+                        <b>be roughly 2-4 sentences in length.</b> We provide the citation for each abstract as well,
+                        but the citations are not relevant for your summary.
+                        You do not need expertise in any subject to complete these summarization tasks. On the fifth and
+                        final page, you will be asked to
+                        complete a survey about your experience with writing the summaries. Once the survey is complete,
+                        you can click "Submit" and you will
+                        be redirected to Prolific.
+                    </p>
+                    <p>
+                        Please note that this interface does not have back buttons, and <b>we ask you to not go back to
+                            previous pages when completing </b>
+                        <b>this assignment</b>. This opening statement can be read in later parts of the assignment by
+                        clicking the "?" button.
+                    </p>
+                    <p>
+                        For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
+                    </p>
+                    <p>
+                        <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task.
+                        That said, the purpose of this
+                        study is to understand human reasoning and expression. For this reason, answers written mostly
+                        in your own words and ideas
+                        are much more valuable to us than answers that closely resemble typical AI outputs.
+                    </p>
+                    <p>
+                        If you complete this assignment, meaning you write a summary for each of the two provided
+                        abstracts, you will be financially compensated
+                        with XX$.
+                    </p>
 
-        <script>
-            function openInfo() {document.getElementById("info_bar").style.width = "500px";}
+                    <h2>Consent and Participant Information</h2>
+                    <p>
+                        As with any online activity the risk of a breach is always possible. To the best of our ability
+                        your answers in this study
+                        will remain confidential. We will minimize any risks by anonymizing the data that we collect. We
+                        will only store the summaries
+                        you write, and behavioral data that is tracked as you write the summaries (e.g. how long it
+                        takes to complete a summary, typing
+                        speed, etc.). None of the data will be personally identifying. Your Prolific ID will be tracked
+                        but not stored, to manage
+                        integration with the Prolific website. The data will be stored in a database provided by
+                        Render.com.
+                    </p>
+                    <p>
+                        <b>You have consented to participating in this research.</b> Do to the anonymity of the data,
+                        your data <b>cannot</b> be removed once you have consented to participating.
+                    </p>
+                </div>
+            </div>
 
-            function closeInfo() {document.getElementById("info_bar").style.width = "0";} 
-        </script>
+            <h1>Summarization Task 1</h1>
+            <p>
+                For this page, we provide you an abstract for you to read. After reading the abstract, please summarize
+                the abstract
+                in the text box. Your summary should be 2-4 sentences in length. Once finished, click 'Next Page'. Note
+                that the reference we
+                include is not relevant for your summary, <b>only the provided abstract text should be summarized.</b>
+            </p>
+            <div class="summarization">
+                <div class="abstract" inert>
+                    <h2> Abstract </h2>
+                    <p>
+                        This research provides evidence that people overestimate the extent to which their actions and
+                        appearance
+                        are noted by others, a phenomenon dubbed the spotlight effect. In Studies 1 and 2, participants
+                        who were
+                        asked to don a T-shirt depicting either a flattering or potentially embarrassing image
+                        overestimated the
+                        number of observers who would be able to recall what was pictured on the shirt. In Study 3,
+                        participants
+                        in a group discussion overestimated how prominent their positive and negative utterances were to
+                        their
+                        fellow discussants. Studies 4 and 5 provide evidence supporting an anchoring-and-adjustment
+                        interpretation
+                        of the spotlight effect. In particular, people appear to anchor on their own rich
+                        phenomenological experience
+                        and then adjust—insufficiently—to take into account the perspective of others. The discussion
+                        focuses on the
+                        manifestations and implications of the spotlight effect across a host of everyday social
+                        phenomena.
+                    </p>
+                    <p><b>Reference</b></p>
+                    <p>
+                        T. Gilovich, V. H. Medvec, and K. Savitsky, “The spotlight effect in social judgment: An
+                        egocentric bias in estimates
+                        of the salience of one’s own actions and appearance.,” Journal of Personality and Social
+                        Psychology, vol. 78, no. 2,
+                        pp. 211–222, 2000, doi: 10.1037/0022-3514.78.2.211.
+                    </p>
+                </div>
+                <div class="sample_summary">
+                    <h2> Summary </h2>
+                    <textarea id="summaryOneInput" rows="6" cols="180" class="input_summary"
+                        onselectstart="return false" onPaste="return false;" onCopy="return false" onCut="return false"
+                        onDrag="return false" onDrop="return false" autocomplete=off></textarea>
+                </div>
+            </div>
 
-        <script>
-            document.addEventListener("copy", function(e) {e.preventDefault();});
-            document.addEventListener("paste", function(e) {e.preventDefault();});
-            document.addEventListener("cut", function(e) {e.preventDefault();});
-            document.addEventListener("contextmenu", function(e) {e.preventDefault();});
-        </script>
-    </body>
+            <button class="next_button" onclick="submit()">Next Page</button>
+        </div>
+    </div>
+
+    <script>
+        function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
+
+        function submit() {
+            const summarization = document.getElementById("summaryOneInput").value;
+            const workerNum = sessionStorage.getItem('workerNumber');
+            let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+
+            const responseData = {
+                "worker_number": Number(workerNum),
+                "task": "task_one",
+                "number_popups": currentCount,
+                "response": summarization
+            };
+
+            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+
+            fetch(postUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(responseData),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    window.location.href = "/summarize_two";
+                })
+                .catch((error) => {
+                    console.error('Error submitting form:', error);
+                    alert('An error occurred during submission. Please try again.');
+                });
+        }
+
+
+        function closeInfo() { document.getElementById("info_bar").style.width = "0"; } 
+    </script>
+
+    <script>
+        document.addEventListener("copy", function (e) { e.preventDefault(); });
+        document.addEventListener("paste", function (e) { e.preventDefault(); });
+        document.addEventListener("cut", function (e) { e.preventDefault(); });
+        document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    </script>
+</body>
+
 </html>
