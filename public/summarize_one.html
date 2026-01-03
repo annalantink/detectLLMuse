@@ -173,12 +173,12 @@
         function submit() {
             const summarization = document.getElementById("summaryOneInput").value;
             const workerNum = sessionStorage.getItem('workerNumber');
-            console.log(workerNum);
+            let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
 
             const responseData = {
                 "worker_number": Number(workerNum),
                 "task": "task_one",
-                "number_popups": 7,
+                "number_popups": currentCount,
                 "response": summarization
             };
 

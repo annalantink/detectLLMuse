@@ -10,6 +10,7 @@
 
 <body>
     <script>
+        sessionStorage.setItem('number_popups', 0);
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {

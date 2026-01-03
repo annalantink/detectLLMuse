@@ -2,6 +2,8 @@
 function showPopup(reason) {
   if (WPM_MODAL_OPEN) return; // pop-up flag already active!
   WPM_MODAL_OPEN = true;
+  let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+  sessionStorage.setItem('number_popups', currentCount + 1);
 
   console.log("Triggering popup due to:", reason);
 
@@ -12,7 +14,7 @@ function showPopup(reason) {
       window.WPM_DETECTOR._prevFocus = active;
       active.blur();
     }
-  } catch (e) {}
+  } catch (e) { }
 
   document.getElementById("detectionModal").style.display = "block";
 
@@ -53,9 +55,9 @@ function setupDetection(textareaId, taskName) {
       });
 
       const result = await response.json();
-      
+
       if (result.similarity >= 0.9) {
-          showPopup("High cosine similarity detected");
+        showPopup("High cosine similarity detected");
       }
 
     } catch (err) {
