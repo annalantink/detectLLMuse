@@ -175,6 +175,11 @@
             const workerNum = sessionStorage.getItem('workerNumber');
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
 
+            if (!summarization.trim()) {
+                alert("Please write a summary before proceeding.");
+                return;
+            }
+
             const responseData = {
                 "worker_number": Number(workerNum),
                 "task": "task_one",
