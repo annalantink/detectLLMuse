@@ -56,7 +56,7 @@ function setupDetection(textareaId, taskName) {
 
       const result = await response.json();
       
-      if (result.similarity >= 0.89) {
+      if (result.similarity >= 0.88) {
           showPopup("High cosine similarity detected");
       }
 

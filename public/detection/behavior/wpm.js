@@ -5,7 +5,7 @@ var THROTTLE = 200;
 var WPM_SUSTAIN_MS = 10000; // 45 WPM must be sustained for 10s
 var WPM_MODAL_OPEN = false; // pop-up state
 
-var DEBUG_WPM_LOG = true;
+var DEBUG_WPM_LOG = false;
 var DEBUG_LOG_INTERVAL = 1000;
 
 // === METRICS ===
