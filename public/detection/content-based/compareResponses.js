@@ -23,7 +23,7 @@ function cosineSimilarity(a, b) {
 }
 
 export async function compareUserResponse(userText, task = "summary1") {
-  console.log("Received detection request:", task, userText.length);
+  // console.log("Received detection request:", task, userText.length);
 
   const responses_dir = path.join(__dirname, "../../../llm-responses"); 
 
@@ -48,7 +48,7 @@ export async function compareUserResponse(userText, task = "summary1") {
     }
   }
 
-  console.log("Max similarity computed:", maxSimilarity);
+  // console.log("Max similarity computed:", maxSimilarity);
 
   return {
     similarity: maxSimilarity

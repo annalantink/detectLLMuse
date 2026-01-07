@@ -1,7 +1,7 @@
 import { pipeline, env } from "@xenova/transformers";
 
 env.allowLocalModels = false;
-nv.backends.onnx.setup = false;
+env.backends.onnx.setup = false;
 env.backends.onnx.wasm.numThreads = 1;
 env.backends.onnx.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/';
 
