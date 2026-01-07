@@ -1,7 +1,9 @@
 import { pipeline, env } from "@xenova/transformers";
 
 env.allowLocalModels = false;
+nv.backends.onnx.setup = false;
 env.backends.onnx.wasm.numThreads = 1;
+env.backends.onnx.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/';
 
 let extractor = null;
 
@@ -13,11 +15,7 @@ async function loadModel() {
         "Xenova/all-MiniLM-L6-v2",
         {
           quantized: true,
-          progress_callback: (p) => {
-            if (p.status === 'progress') {
-              console.log(`Loading Model: ${p.progress.toFixed(2)}%`);
-            }
-          }
+          device: 'wasm',
         }
       );
     } catch (error) {
