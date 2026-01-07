@@ -11,6 +11,12 @@
 </head>
 
 <body>
+    <script>
+        const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
+        fetch(BACKEND)
+            .then((response) => {
+            })
+    </script>
     <div class="container">
         <div class="sidebar_container">
             <div style="height: 155vh;" class="sidebar">
@@ -241,7 +247,8 @@
                     </form>
                 </div>
             </div>
-            <button class="next_button" onclick="submitResponse()" style="margin-top: 30px; cursor: pointer;">Submit</button>
+            <button class="next_button" onclick="submitResponse()"
+                style="margin-top: 30px; cursor: pointer;">Submit</button>
         </div>
     </div>
 
@@ -269,7 +276,7 @@
 
             if (q1 == "No response" || q2 == "No response" || !q3.trim() || q4 == "No response" || q5 == "No response" || q6 == "No response" ||
                 q7 == "No response" || q8 == "No response" || q9 == "No response" || q10 == "No response" || q11 == "No response"
-            ){
+            ) {
                 alert("Please complete the survey before proceeding.");
                 return;
             }
