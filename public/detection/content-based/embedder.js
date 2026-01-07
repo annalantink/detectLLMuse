@@ -1,4 +1,4 @@
-import { pipeline } from "@xenova/transformers";
+import { pipeline, env } from "@xenova/transformers";
 
 env.allowLocalModels = false;
 env.backends.onnx.wasm.numThreads = 1;
