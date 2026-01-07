@@ -188,7 +188,7 @@
         document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
         function submit() {
             const summarization = document.getElementById("summaryTwoInput").value;
-            const workerNum = sessionStorage.getItem('workerNumber');
+            
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
             let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
 
@@ -197,33 +197,9 @@
                 return;
             }
 
-            const responseData = {
-                "worker_number": Number(workerNum),
-                "task": "task_two",
-                "number_popups": currentCount,
-                "number_tabswitch": tabswitchCount,
-                "response": summarization
-            };
-
-            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
-
-            fetch(postUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(responseData),
-            })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response error: ' + response.statusText);
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Success:', data);
-                    window.location.href = "/survey";
-                })
-                .catch((error) => {
-                    console.error('Error submitting Task 2:', error);
-                    alert('Submission failed. Please try again.');
-                });
+            sessionStorage.setItem('summarization2', summarization);
+            sessionStorage.setItem('popupCount2', currentCount);
+            sessionStorage.setItem('tabswitchCount2', tabswitchCount);
         }
 
     </script>

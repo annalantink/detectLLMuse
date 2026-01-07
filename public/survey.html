@@ -261,7 +261,54 @@
 
         function closeInfo() { document.getElementById("info_bar").style.width = "0"; }
 
+        async function submitSummarizationTask(number) {
+            try {
+                const workerNum = sessionStorage.getItem('pid');
+                summarization = sessionStorage.getItem(`summarization${number}`)
+                let currentCount = parseInt(sessionStorage.getItem(`popupCount${number}`)) || 0;
+                let tabswitchCount = parseInt(sessionStorage.getItem(`tabswitchCount${number}`)) || 0;
+
+                if (!summarization.trim()) {
+                    alert("Please write a summary before proceeding.");
+                    return;
+                }
+                let task = "task_one";
+                if (number == 2) {
+                    task = "task_two"
+                }
+                const responseData = {
+                    "worker_number": workerNum,
+                    "task": task,
+                    "number_popups": currentCount,
+                    "number_tabswitch": tabswitchCount,
+                    "response": summarization
+                };
+
+                const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+
+                const postResponse = await fetch(postUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(responseData),
+                });
+
+                if (!postResponse.ok) {
+                    throw new Error('Network response was not ok: ' + postResponse.statusText);
+                }
+
+                const result = await postResponse.json();
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         function submitResponse() {
+            const workerNum = sessionStorage.getItem('pid');
+            submitSummarizationTask(1);
+            submitSummarizationTask(2);
             const q1 = getRadioValue('familiarity');
             const q2 = getRadioValue('frequency');
             const q3 = document.getElementById('q3_text').value;
@@ -281,7 +328,6 @@
                 return;
             }
 
-            const workerNum = sessionStorage.getItem('workerNumber');
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
             let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
 

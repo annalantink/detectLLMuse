@@ -1,10 +1,10 @@
 CREATE TABLE workers (
-    worker_number SERIAL PRIMARY KEY,
+    worker_number TEXT PRIMARY KEY,
     joined_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE task_one (
-    worker_number SERIAL PRIMARY KEY REFERENCES workers(worker_number),
+    worker_number TEXT PRIMARY KEY REFERENCES workers(worker_number),
     number_popups INTEGER NOT NULL,
     number_tabswitch INTEGER NOT NULL,
     response TEXT NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE task_one (
 );
 
 CREATE TABLE task_two (
-    worker_number SERIAL PRIMARY KEY REFERENCES workers(worker_number),
+    worker_number TEXT PRIMARY KEY REFERENCES workers(worker_number),
     number_popups INTEGER NOT NULL,
     number_tabswitch INTEGER NOT NULL,
     response TEXT NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE task_two (
 );
 
 CREATE TABLE survey (
-    worker_number INTEGER PRIMARY KEY REFERENCES workers(worker_number),
+    worker_number TEXT PRIMARY KEY REFERENCES workers(worker_number),
     number_popups INTEGER NOT NULL,
     number_tabswitch INTEGER NOT NULL,
     question_1 TEXT,

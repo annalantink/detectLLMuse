@@ -10,6 +10,22 @@
 
 <body>
     <script>
+        function captureProlificData() {
+            const params = new URLSearchParams(window.location.search);
+
+            const data = {
+                pid: params.get('PROLIFIC_PID'),
+                studyId: params.get('study_id'),
+                sessionId: params.get('session_id')
+            };
+
+            if (data.pid) {
+                sessionStorage.setItem('prolific_data', JSON.stringify(data));
+                sessionStorage.setItem('pid', data.pid);
+            }
+        }
+
+        captureProlificData();
         sessionStorage.setItem('number_popups', 0);
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
