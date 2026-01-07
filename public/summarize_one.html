@@ -7,24 +7,6 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/info_bar.css">
     <title>Abstract Summarization</title>
-    <script type="text/javascript">
-        window.onload = async function () {
-            try {
-                const response = await fetch("https://detectllmuse-backend.onrender.com/api/worker/number", {
-                    method: 'GET',
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error, status ${response.status}`)
-                }
-                const data = await response.json();
-                const number = data.worker_number;
-                sessionStorage.setItem('workerNumber', number);
-                console.log(`Set number ${sessionStorage.getItem('workerNumber')}`)
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    </script>
 </head>
 
 <body id="doc_body">
@@ -172,6 +154,22 @@
 
         function submit() {
             const summarization = document.getElementById("summaryOneInput").value;
+            
+            try {
+                const response = fetch("https://detectllmuse-backend.onrender.com/api/worker/number", {
+                    method: 'GET',
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error, status ${response.status}`)
+                }
+                const data = response.json();
+                const number = data.worker_number;
+                sessionStorage.setItem('workerNumber', number);
+                console.log(`Set number ${sessionStorage.getItem('workerNumber')}`)
+            } catch (error) {
+                console.log(error);
+            }
+
             const workerNum = sessionStorage.getItem('workerNumber');
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
 
