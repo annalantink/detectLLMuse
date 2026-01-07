@@ -263,7 +263,7 @@
 
         async function submitSummarizationTask(number) {
             try {
-                const workerNum = sessionStorage.getItem('pid');
+                const pid = sessionStorage.getItem('pid');
                 summarization = sessionStorage.getItem(`summarization${number}`)
                 let currentCount = parseInt(sessionStorage.getItem(`popupCount${number}`)) || 0;
                 let tabswitchCount = parseInt(sessionStorage.getItem(`tabswitchCount${number}`)) || 0;
@@ -277,7 +277,7 @@
                     task = "task_two"
                 }
                 const responseData = {
-                    "worker_number": workerNum,
+                    "pid": pid,
                     "task": task,
                     "number_popups": currentCount,
                     "number_tabswitch": tabswitchCount,
@@ -306,7 +306,7 @@
         }
 
         function submitResponse() {
-            const workerNum = sessionStorage.getItem('pid');
+            const pid = sessionStorage.getItem('pid');
             submitSummarizationTask(1);
             submitSummarizationTask(2);
             const q1 = getRadioValue('familiarity');
@@ -332,7 +332,7 @@
             let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
 
             const responseData = {
-                "worker_number": workerNum,
+                "pid": pid,
                 "task": "survey",
                 "number_popups": currentCount,
                 "number_tabswitch": tabswitchCount,

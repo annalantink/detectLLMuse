@@ -19,7 +19,7 @@ const CORS_HEADERS = {
 const ALLOWED_TABLES = ['task_one', 'task_two', 'survey'];
 
 interface ResponsePayload {
-    worker_number: number;
+    pid: string;
     task: string;
     number_popups: number;
     number_tabswitch: number,
@@ -52,7 +52,7 @@ const server = Bun.serve({
             POST: async req => {
                 try {
                     const body: ResponsePayload = await req.json() as ResponsePayload;
-                    const { worker_number, task, number_popups, number_tabswitch, response,
+                    const { pid, task, number_popups, number_tabswitch, response,
                         question1,
                         question2,
                         question3,
@@ -65,9 +65,9 @@ const server = Bun.serve({
                         question10,
                         question11,
                         question12 } = body;
-                    if (!worker_number || !task) {
+                    if (!pid || !task) {
                         return Response.json(
-                            { error: "Missing: worker_number, task" },
+                            { error: "Missing: pid, task" },
                             { status: 400, headers: CORS_HEADERS }
                         );
                     }
@@ -79,7 +79,7 @@ const server = Bun.serve({
                             await postgres`
                                 INSERT INTO survey 
                                 (
-                                    worker_number, 
+                                    pid, 
                                     number_popups,
                                     number_tabswitch, 
                                     question_1, 
@@ -97,7 +97,7 @@ const server = Bun.serve({
                                     created_at
                                 )
                                 VALUES (
-                                    ${worker_number}, 
+                                    ${pid}, 
                                     ${number_popups}, 
                                     ${number_tabswitch},
                                     ${question1}, 
@@ -117,15 +117,15 @@ const server = Bun.serve({
                             `;
                             return Response.json({
                                 created: true,
-                                worker_number,
+                                pid,
                                 number_popups,
                                 response
                             }, { status: 201, headers: CORS_HEADERS, });
                         }
                         if (task == "task_one" || task == "task_two") {
                             await postgres`
-                                INSERT INTO ${postgres(task)} (worker_number, number_popups, number_tabswitch, response, created_at)
-                                VALUES (${worker_number}, ${number_popups}, ${number_tabswitch}, ${response}, NOW())
+                                INSERT INTO ${postgres(task)} (pid, number_popups, number_tabswitch, response, created_at)
+                                VALUES (${pid}, ${number_popups}, ${number_tabswitch}, ${response}, NOW())
                             `;
                         } else {
                             return Response.json(
@@ -135,7 +135,7 @@ const server = Bun.serve({
                         }
                         return Response.json({
                             created: true,
-                            worker_number,
+                            pid,
                             number_popups,
                             response
                         }, { status: 201, headers: CORS_HEADERS, });
@@ -160,8 +160,8 @@ const server = Bun.serve({
         "/api/worker/number": {
             GET: async () => {
                 if (postgres != null) {
-                    let data = await postgres`INSERT INTO workers DEFAULT VALUES RETURNING worker_number;`
-                    return new Response(JSON.stringify({ "worker_number": data[0].worker_number }), { headers: CORS_HEADERS })
+                    let data = await postgres`INSERT INTO workers DEFAULT VALUES RETURNING pid;`
+                    return new Response(JSON.stringify({ "pid": data[0].pid }), { headers: CORS_HEADERS })
                 }
                 return Response.json({ status: 400, headers: CORS_HEADERS })
             }
