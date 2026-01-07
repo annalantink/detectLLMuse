@@ -42,7 +42,10 @@ const server = Bun.serve({
     port: 8080,
     routes: {
 
-        "/api/status": new Response("OK"),
+        "/api/status": new Response("OK", {
+            status: 200,
+            headers: CORS_HEADERS
+        }),
 
         // Add to the table.
         "/api/response/add": {
