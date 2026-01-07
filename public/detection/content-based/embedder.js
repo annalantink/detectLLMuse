@@ -1,13 +1,29 @@
 import { pipeline } from "@xenova/transformers";
 
+env.allowLocalModels = false;
+env.backends.onnx.wasm.numThreads = 1;
+
 let extractor = null;
 
 async function loadModel() {
   if (!extractor) {
-    extractor = await pipeline(
-      "feature-extraction",
-      "Xenova/all-MiniLM-L6-v2"
-    );
+    try {
+      extractor = await pipeline(
+        "feature-extraction",
+        "Xenova/all-MiniLM-L6-v2",
+        {
+          quantized: true,
+          progress_callback: (p) => {
+            if (p.status === 'progress') {
+              console.log(`Loading Model: ${p.progress.toFixed(2)}%`);
+            }
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Model failed to load, retrying with WASM fallback...");
+      throw error;
+    }
   }
   return extractor;
 }
