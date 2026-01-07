@@ -264,7 +264,7 @@
         async function submitSummarizationTask(number) {
             try {
                 const pid = sessionStorage.getItem('pid');
-                summarization = sessionStorage.getItem(`summarization${number}`)
+                let summarization = sessionStorage.getItem(`summarization${number}`)
                 let currentCount = parseInt(sessionStorage.getItem(`popupCount${number}`)) || 0;
                 let tabswitchCount = parseInt(sessionStorage.getItem(`tabswitchCount${number}`)) || 0;
 
