@@ -152,62 +152,62 @@
     <script>
         function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
 
-        function submit() {
+        async function submit() {
             const summarization = document.getElementById("summaryOneInput").value;
-            
+
+            if (!summarization.trim()) {
+                alert("Please write a summary.");
+                return;
+            }
+
             try {
-                const response = fetch("https://detectllmuse-backend.onrender.com/api/worker/number", {
+                const response = await fetch("https://detectllmuse-backend.onrender.com/api/worker/number", {
                     method: 'GET',
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error, status ${response.status}`)
                 }
-                const data = response.json();
+                const data = await response.json();
                 const number = data.worker_number;
                 sessionStorage.setItem('workerNumber', number);
                 console.log(`Set number ${sessionStorage.getItem('workerNumber')}`)
+
+                const workerNum = sessionStorage.getItem('workerNumber');
+                let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+
+                if (!summarization.trim()) {
+                    alert("Please write a summary before proceeding.");
+                    return;
+                }
+
+                const responseData = {
+                    "worker_number": Number(workerNum),
+                    "task": "task_one",
+                    "number_popups": currentCount,
+                    "response": summarization
+                };
+
+                const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+
+                const postResponse = await fetch(postUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(responseData),
+                });
+
+                if (!postResponse.ok) {
+                    throw new Error('Network response was not ok: ' + postResponse.statusText);
+                }
+
+                const result = await postResponse.json();
+
+                window.location.href = "/summarize_two";
+                
             } catch (error) {
                 console.log(error);
             }
-
-            const workerNum = sessionStorage.getItem('workerNumber');
-            let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
-
-            if (!summarization.trim()) {
-                alert("Please write a summary before proceeding.");
-                return;
-            }
-
-            const responseData = {
-                "worker_number": Number(workerNum),
-                "task": "task_one",
-                "number_popups": currentCount,
-                "response": summarization
-            };
-
-            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
-
-            fetch(postUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(responseData),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok: ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Success:', data);
-                    window.location.href = "/summarize_two";
-                })
-                .catch((error) => {
-                    console.error('Error submitting form:', error);
-                    alert('An error occurred during submission. Please try again.');
-                });
         }
 
 
