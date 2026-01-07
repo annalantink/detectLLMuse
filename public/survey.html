@@ -332,7 +332,7 @@
             let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
 
             const responseData = {
-                "worker_number": workerNum ? Number(workerNum) : 0,
+                "worker_number": workerNum,
                 "task": "survey",
                 "number_popups": currentCount,
                 "number_tabswitch": tabswitchCount,
