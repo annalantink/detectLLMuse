@@ -276,11 +276,13 @@
 
             const workerNum = sessionStorage.getItem('workerNumber');
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+            let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
 
             const responseData = {
                 "worker_number": workerNum ? Number(workerNum) : 0,
                 "task": "survey",
                 "number_popups": currentCount,
+                "number_tabswitch": tabswitchCount,
                 "question1": q1,
                 "question2": q2,
                 "question3": q3,

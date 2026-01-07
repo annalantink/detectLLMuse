@@ -4,5 +4,7 @@ document.addEventListener("visibilitychange", (event) => {
     console.log("tab is active");
   } else {
     console.log("tab is inactive");
+    let currentCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
+    sessionStorage.setItem('tab_switch', currentCount + 1);
   }
 });

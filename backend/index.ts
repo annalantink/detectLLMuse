@@ -22,6 +22,7 @@ interface ResponsePayload {
     worker_number: number;
     task: string;
     number_popups: number;
+    number_tabswitch: number,
     response?: string;
     question1?: string,
     question2?: string,
@@ -51,7 +52,7 @@ const server = Bun.serve({
             POST: async req => {
                 try {
                     const body: ResponsePayload = await req.json() as ResponsePayload;
-                    const { worker_number, task, number_popups, response,
+                    const { worker_number, task, number_popups, number_tabswitch, response,
                         question1,
                         question2,
                         question3,
@@ -79,7 +80,8 @@ const server = Bun.serve({
                                 INSERT INTO survey 
                                 (
                                     worker_number, 
-                                    number_popups, 
+                                    number_popups,
+                                    number_tabswitch, 
                                     question_1, 
                                     question_2, 
                                     question_3, 
@@ -97,6 +99,7 @@ const server = Bun.serve({
                                 VALUES (
                                     ${worker_number}, 
                                     ${number_popups}, 
+                                    ${number_tabswitch},
                                     ${question1}, 
                                     ${question2}, 
                                     ${question3}, 
@@ -121,8 +124,8 @@ const server = Bun.serve({
                         }
                         if (task == "task_one" || task == "task_two") {
                             await postgres`
-                                INSERT INTO ${postgres(task)} (worker_number, number_popups, response, created_at)
-                                VALUES (${worker_number}, ${number_popups}, ${response}, NOW())
+                                INSERT INTO ${postgres(task)} (worker_number, number_popups, number_tabswitch, response, created_at)
+                                VALUES (${worker_number}, ${number_popups}, ${number_tabswitch}, ${response}, NOW())
                             `;
                         } else {
                             return Response.json(
@@ -151,39 +154,6 @@ const server = Bun.serve({
                     );
                 }
             },
-        },
-
-        // Get responses from a task or survey.
-        "/api/response/get/:task": {
-            GET: async (req) => {
-                const url = new URL(req.url);
-                const apiKey = url.searchParams.get("key");
-                if (!apiKey || apiKey !== Bun.env.API_KEY) {
-                    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-                        status: 401,
-                        headers: CORS_HEADERS
-                    });
-                }
-
-                const taskName = req.params.task;
-
-                if (!ALLOWED_TABLES.includes(taskName)) {
-                    return new Response(JSON.stringify({ error: "Invalid task name" }), {
-                        status: 403,
-                        headers: CORS_HEADERS
-                    });
-                }
-
-                if (postgres != null) {
-                    let data = await postgres`SELECT * FROM ${postgres(taskName)}`;
-                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS });
-                }
-
-                return new Response(JSON.stringify({ error: "Database connection failed" }), {
-                    status: 500,
-                    headers: CORS_HEADERS
-                });
-            }
         },
 
         // Gives the worker an unique number.
