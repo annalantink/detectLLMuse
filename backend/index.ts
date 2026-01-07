@@ -75,6 +75,11 @@ const server = Bun.serve({
                         return new Response(JSON.stringify({ error: "Invalid task name" }), { status: 403, headers: CORS_HEADERS });
                     }
                     if (postgres != null) {
+                        await postgres`
+                            INSERT INTO workers (pid) 
+                            VALUES (${pid}) 
+                            ON CONFLICT (pid) DO NOTHING
+                        `;
                         if (task == "survey") {
                             await postgres`
                                 INSERT INTO survey 
