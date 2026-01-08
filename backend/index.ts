@@ -167,17 +167,7 @@ const server = Bun.serve({
                 }
             },
         },
-
-        // Gives the worker an unique number.
-        "/api/worker/number": {
-            GET: async () => {
-                if (postgres != null) {
-                    let data = await postgres`INSERT INTO workers DEFAULT VALUES RETURNING pid;`
-                    return new Response(JSON.stringify({ "pid": data[0].pid }), { headers: CORS_HEADERS })
-                }
-                return Response.json({ status: 400, headers: CORS_HEADERS })
-            }
-        },
+        
     },
 
     fetch(req) {
