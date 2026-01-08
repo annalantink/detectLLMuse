@@ -4,6 +4,10 @@ html, body{
     margin: 0;
 }
 
+li {
+    padding: 5px;
+}
+
 .container{
     grid-template-columns: 9% auto;
     display: grid;
