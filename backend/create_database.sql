@@ -35,5 +35,6 @@ CREATE TABLE survey (
     question_10 TEXT,
     question_11 TEXT,
     question_12 TEXT,
+    question_13 TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

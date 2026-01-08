@@ -36,6 +36,7 @@ interface ResponsePayload {
     question10?: string,
     question11?: string,
     question12?: string,
+    question13?: string,
 }
 
 const server = Bun.serve({
@@ -67,7 +68,8 @@ const server = Bun.serve({
                         question9,
                         question10,
                         question11,
-                        question12 } = body;
+                        question12,
+                        question13 } = body;
                     if (!pid || !task) {
                         return Response.json(
                             { error: "Missing: pid, task" },
@@ -101,7 +103,8 @@ const server = Bun.serve({
                                     question_9, 
                                     question_10, 
                                     question_11, 
-                                    question_12, 
+                                    question_12,
+                                    question_13, 
                                     created_at
                                 )
                                 VALUES (
@@ -120,6 +123,7 @@ const server = Bun.serve({
                                     ${question10}, 
                                     ${question11}, 
                                     ${question12}, 
+                                    ${question13}, 
                                     NOW()
                                 )
                             `;
