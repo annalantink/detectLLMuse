@@ -342,28 +342,7 @@
         async function submitResponse() {
             const btn = document.querySelector('.next_button');
             const originalText = btn.innerText;
-    
-            let isReady = await checkBackend();
-            if (!isReady) {
-                btn.innerText = "Submitting... Please wait";
-                btn.disabled = true;
 
-                while (!isReady) {
-                    console.log("Backend cold-starting, retrying in 2 seconds...");
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    isReady = await checkBackend();
-                }
-
-                await waitForBackend();
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
-
-            const pid = sessionStorage.getItem('pid');
-
-            await submitSummarizationTask(1);
-            await submitSummarizationTask(2);
-            
             const q1 = getRadioValue('familiarity');
             const q2 = getRadioValue('frequency');
             const q3 = document.getElementById('q3_text').value;
@@ -385,56 +364,68 @@
                 alert("Please complete the survey before proceeding.");
                 return;
             }
-            let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
-            let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
 
-            const responseData = {
-                "pid": pid,
-                "task": "survey",
-                "number_popups": currentCount,
-                "number_tabswitch": tabswitchCount,
-                "question1": q1,
-                "question2": q2,
-                "question3": q3,
-                "question4": q4,
-                "question5": q5,
-                "question6": q6,
-                "question7": q7,
-                "question8": q8,
-                "question9": q9,
-                "question10": q10,
-                "question11": q11,
-                "question12": q12,
-                "question13": q13,
-            };
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+            try {
+                // Wake up backend if cold
+                let isReady = await checkBackend();
+                while (!isReady) {
+                    btn.innerText = "Submitting tasks...";
+                    console.log("Backend cold-starting, retrying in 2 seconds...");
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    isReady = await checkBackend();
+                }
 
-            console.log("Submitting data:", responseData);
+                await submitSummarizationTask(1);
+                await submitSummarizationTask(2);
 
-            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+                let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+                let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
+                const pid = sessionStorage.getItem('pid');
 
-            fetch(postUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(responseData),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok: ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Success:', data);
-                    // Redirect to final page or Prolific here
-                    // window.location.href = "https://app.prolific.co/submissions/complete?cc=YOURCODE";
-                    alert('Submission successful! You would now be redirected.');
-                })
-                .catch((error) => {
-                    console.error('Error submitting form:', error);
-                    alert('An error occurred during submission. Please try again.');
+                const responseData = {
+                    "pid": pid,
+                    "task": "survey",
+                    "number_popups": currentCount,
+                    "number_tabswitch": tabswitchCount,
+                    "question1": q1,
+                    "question2": q2,
+                    "question3": q3,
+                    "question4": q4,
+                    "question5": q5,
+                    "question6": q6,
+                    "question7": q7,
+                    "question8": q8,
+                    "question9": q9,
+                    "question10": q10,
+                    "question11": q11,
+                    "question12": q12,
+                    "question13": q13,
+                };
+
+                console.log("Submitting data:", responseData);
+
+                const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+
+                const response = await fetch(postUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(responseData),
                 });
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                console.log('Success:', data);
+                // window.location.href = "https://app.prolific.co/submissions/complete?cc=YOURCODE";
+                alert('Submission successful! You would now be redirected.');
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
         }
     </script>
 </body>
