@@ -1,12 +1,21 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-
-import { getEmbedding } from "./embedder.js";
 import { getUserEmbedding } from "./userEmbedding.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const EMBEDDINGS_PATH = path.join(__dirname, "llm_embeddings.json");
+
+let PRECOMPUTED_DATA = [];
+try {
+  const rawData = fs.readFileSync(EMBEDDINGS_PATH, "utf-8");
+  PRECOMPUTED_DATA = JSON.parse(rawData);
+  console.log(`Successfully loaded ${PRECOMPUTED_DATA.length} precomputed embeddings.`);
+} catch (err) {
+  console.error("Could not load llm_embeddings.json", err);
+}
 
 function cosineSimilarity(a, b) {
   let dot = 0;
@@ -18,31 +27,24 @@ function cosineSimilarity(a, b) {
     normA += a[i] * a[i];
     normB += b[i] * b[i];
   }
-
+  
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
 export async function compareUserResponse(userText, task = "summary1") {
-  console.log("Received detection request:", task, userText.length);
-
-  const responses_dir = path.join(__dirname, "../../../llm-responses"); 
-
-  const referenceFolder =
-    task === "summary1"
-      ? path.join(responses_dir, "summary1")
-      : path.join(responses_dir, "summary2");
-
-  let files = fs.readdirSync(referenceFolder);
-
+  console.log("Received detection request for:", task, "| Input length:", userText.length);
   const userEmbedding = await getUserEmbedding(userText);
 
   let maxSimilarity = 0;
 
-  for (const file of files) {
-    const content = fs.readFileSync(path.join(referenceFolder, file), "utf-8");
-    const embedding = await getEmbedding(content);
-    const similarity = cosineSimilarity(userEmbedding, embedding);
+  const taskEmbeddings = PRECOMPUTED_DATA.filter(item => item.category === task);
 
+  if (taskEmbeddings.length === 0) {
+    console.warn(`No precomputed embeddings found for category: ${task}`);
+  }
+
+  for (const item of taskEmbeddings) {
+    const similarity = cosineSimilarity(userEmbedding, item.embedding);
     if (similarity > maxSimilarity) {
       maxSimilarity = similarity;
     }
@@ -53,5 +55,4 @@ export async function compareUserResponse(userText, task = "summary1") {
   return {
     similarity: maxSimilarity
   };
-  
 }
