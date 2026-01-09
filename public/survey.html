@@ -12,6 +12,7 @@
 
 <body>
     <script>
+        sessionStorage.setItem('tab_switch', 0);
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {
