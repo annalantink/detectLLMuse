@@ -11,17 +11,6 @@
 
 <body>
     <script>
-        window.addEventListener('pageshow', (event) => {
-            const navigationType = performance.getEntriesByType("navigation")[0]?.type;
-
-            if (event.persisted || navigationType === 'back_forward') {
-                detectTabSwitch("2");
-            }
-            window.addEventListener('beforeunload', (event) => {
-                stopDetectingTabSwitch();
-            });
-        });
-
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {
@@ -174,7 +163,19 @@
     <script src="detection/detection.js"></script>
     <script src="detection/behavior/wpm.js"></script>
     <script src="/detection/behavior/tabSwitch.js"></script>
-    <script>detectTabSwitch("2");</script>
+    <script>
+        detectTabSwitch("2");
+
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                detectTabSwitch("2");
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            stopDetectingTabSwitch();
+        });
+    </script>
     <script src="detection/behavior/pause.js"></script>
     <script src="detection/behavior/backspace.js"></script>
     <script>
@@ -204,8 +205,6 @@
 
             sessionStorage.setItem('summarization2', summarization);
             sessionStorage.setItem('popupCount2', currentCount);
-
-            console.log(parseInt(sessionStorage.getItem('tabswitchCount2')) || 0);
 
             window.location.href = "/survey"
         }

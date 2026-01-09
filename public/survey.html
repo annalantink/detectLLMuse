@@ -12,18 +12,6 @@
 
 <body>
     <script>
-        console.log(parseInt(sessionStorage.getItem('tabswitchCount1')) || 0);
-        console.log(parseInt(sessionStorage.getItem('tabswitchCount2')) || 0);
-        window.addEventListener('pageshow', (event) => {
-            const navigationType = performance.getEntriesByType("navigation")[0]?.type;
-
-            if (event.persisted || navigationType === 'back_forward') {
-                detectTabSwitch("Survey");
-            }
-            window.addEventListener('beforeunload', (event) => {
-                stopDetectingTabSwitch();
-            });
-        });
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {
@@ -288,7 +276,19 @@
         </div>
     </div>
     <script src="/detection/behavior/tabSwitch.js"></script>
-    <script>detectTabSwitch("Survey");</script>
+    <script>
+        detectTabSwitch("Survey");
+
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                detectTabSwitch("Survey");
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            stopDetectingTabSwitch();
+        });
+    </script>
     <script>
         async function checkBackend() {
             const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";

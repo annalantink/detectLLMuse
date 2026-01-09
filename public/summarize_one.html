@@ -11,17 +11,6 @@
 
 <body id="doc_body">
     <script>
-        window.addEventListener('pageshow', (event) => {
-            const navigationType = performance.getEntriesByType("navigation")[0]?.type;
-
-            if (event.persisted || navigationType === 'back_forward') {
-                detectTabSwitch("1");
-            }
-            window.addEventListener('beforeunload', (event) => {
-                stopDetectingTabSwitch();
-            });
-        });
-
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {
@@ -143,7 +132,19 @@
         </div>
     </div>
     <script src="/detection/behavior/tabSwitch.js"></script>
-    <script>detectTabSwitch("1");</script>
+    <script>
+        detectTabSwitch("1");
+
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                detectTabSwitch("1");
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            stopDetectingTabSwitch();
+        });
+    </script>
     <script>
         function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
 
@@ -161,8 +162,6 @@
 
             sessionStorage.setItem('summarization1', summarization);
             sessionStorage.setItem('popupCount1', currentCount);
-
-            console.log(parseInt(sessionStorage.getItem('tabswitchCount1')) || 0);
 
             window.location.href = "/summarize_two"
         }
