@@ -7,27 +7,15 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/info_bar.css">
     <title>Abstract Summarization</title>
-    <script type="text/javascript">
-        window.onload = async function () {
-            try {
-                const response = await fetch("https://detectllmuse-backend.onrender.com/api/worker/number", {
-                    method: 'GET',
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error, status ${response.status}`)
-                }
-                const data = await response.json();
-                const number = data.worker_number;
-                sessionStorage.setItem('workerNumber', number);
-                console.log(`Set number ${sessionStorage.getItem('workerNumber')}`)
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    </script>
 </head>
 
 <body id="doc_body">
+    <script>
+        const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
+        fetch(BACKEND)
+            .then((response) => {
+            })
+    </script>
     <div class="container">
         <div class="sidebar_container">
             <div class="sidebar">
@@ -143,50 +131,39 @@
             <button class="next_button" onclick="submit()">Next Page</button>
         </div>
     </div>
+    <script src="/detection/behavior/tabSwitch.js"></script>
+    <script>
+        detectTabSwitch("1");
 
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                detectTabSwitch("1");
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            stopDetectingTabSwitch();
+        });
+    </script>
     <script>
         function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
 
-        function submit() {
+        async function submit() {
             const summarization = document.getElementById("summaryOneInput").value;
-            const workerNum = sessionStorage.getItem('workerNumber');
+
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
 
             if (!summarization.trim()) {
-                alert("Please write a summary before proceeding.");
+                alert("Please write a summary.");
                 return;
             }
 
-            const responseData = {
-                "worker_number": Number(workerNum),
-                "task": "task_one",
-                "number_popups": currentCount,
-                "response": summarization
-            };
+            // stopDetectingTabSwitch();
 
-            const postUrl = "https://detectllmuse-backend.onrender.com/api/response/add";
+            sessionStorage.setItem('summarization1', summarization);
+            sessionStorage.setItem('popupCount1', currentCount);
 
-            fetch(postUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(responseData),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok: ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Success:', data);
-                    window.location.href = "/summarize_two";
-                })
-                .catch((error) => {
-                    console.error('Error submitting form:', error);
-                    alert('An error occurred during submission. Please try again.');
-                });
+            window.location.href = "/summarize_two"
         }
 
 

@@ -19,9 +19,10 @@ const CORS_HEADERS = {
 const ALLOWED_TABLES = ['task_one', 'task_two', 'survey'];
 
 interface ResponsePayload {
-    worker_number: number;
+    pid: string;
     task: string;
     number_popups: number;
+    number_tabswitch: number,
     response?: string;
     question1?: string,
     question2?: string,
@@ -35,13 +36,17 @@ interface ResponsePayload {
     question10?: string,
     question11?: string,
     question12?: string,
+    question13?: string,
 }
 
 const server = Bun.serve({
     port: 8080,
     routes: {
 
-        "/api/status": new Response("OK"),
+        "/api/status": new Response("OK", {
+            status: 200,
+            headers: CORS_HEADERS
+        }),
 
         // Add to the table.
         "/api/response/add": {
@@ -51,7 +56,7 @@ const server = Bun.serve({
             POST: async req => {
                 try {
                     const body: ResponsePayload = await req.json() as ResponsePayload;
-                    const { worker_number, task, number_popups, response,
+                    const { pid, task, number_popups, number_tabswitch, response,
                         question1,
                         question2,
                         question3,
@@ -63,10 +68,11 @@ const server = Bun.serve({
                         question9,
                         question10,
                         question11,
-                        question12 } = body;
-                    if (!worker_number || !task) {
+                        question12,
+                        question13 } = body;
+                    if (!pid || !task) {
                         return Response.json(
-                            { error: "Missing: worker_number, task" },
+                            { error: "Missing: pid, task" },
                             { status: 400, headers: CORS_HEADERS }
                         );
                     }
@@ -74,12 +80,18 @@ const server = Bun.serve({
                         return new Response(JSON.stringify({ error: "Invalid task name" }), { status: 403, headers: CORS_HEADERS });
                     }
                     if (postgres != null) {
+                        await postgres`
+                            INSERT INTO workers (pid) 
+                            VALUES (${pid}) 
+                            ON CONFLICT (pid) DO NOTHING
+                        `;
                         if (task == "survey") {
                             await postgres`
                                 INSERT INTO survey 
                                 (
-                                    worker_number, 
-                                    number_popups, 
+                                    pid, 
+                                    number_popups,
+                                    number_tabswitch, 
                                     question_1, 
                                     question_2, 
                                     question_3, 
@@ -91,12 +103,14 @@ const server = Bun.serve({
                                     question_9, 
                                     question_10, 
                                     question_11, 
-                                    question_12, 
+                                    question_12,
+                                    question_13, 
                                     created_at
                                 )
                                 VALUES (
-                                    ${worker_number}, 
+                                    ${pid}, 
                                     ${number_popups}, 
+                                    ${number_tabswitch},
                                     ${question1}, 
                                     ${question2}, 
                                     ${question3}, 
@@ -109,20 +123,21 @@ const server = Bun.serve({
                                     ${question10}, 
                                     ${question11}, 
                                     ${question12}, 
+                                    ${question13}, 
                                     NOW()
                                 )
                             `;
                             return Response.json({
                                 created: true,
-                                worker_number,
+                                pid,
                                 number_popups,
                                 response
                             }, { status: 201, headers: CORS_HEADERS, });
                         }
                         if (task == "task_one" || task == "task_two") {
                             await postgres`
-                                INSERT INTO ${postgres(task)} (worker_number, number_popups, response, created_at)
-                                VALUES (${worker_number}, ${number_popups}, ${response}, NOW())
+                                INSERT INTO ${postgres(task)} (pid, number_popups, number_tabswitch, response, created_at)
+                                VALUES (${pid}, ${number_popups}, ${number_tabswitch}, ${response}, NOW())
                             `;
                         } else {
                             return Response.json(
@@ -132,7 +147,7 @@ const server = Bun.serve({
                         }
                         return Response.json({
                             created: true,
-                            worker_number,
+                            pid,
                             number_popups,
                             response
                         }, { status: 201, headers: CORS_HEADERS, });
@@ -152,50 +167,7 @@ const server = Bun.serve({
                 }
             },
         },
-
-        // Get responses from a task or survey.
-        "/api/response/get/:task": {
-            GET: async (req) => {
-                const url = new URL(req.url);
-                const apiKey = url.searchParams.get("key");
-                if (!apiKey || apiKey !== Bun.env.API_KEY) {
-                    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-                        status: 401,
-                        headers: CORS_HEADERS
-                    });
-                }
-
-                const taskName = req.params.task;
-
-                if (!ALLOWED_TABLES.includes(taskName)) {
-                    return new Response(JSON.stringify({ error: "Invalid task name" }), {
-                        status: 403,
-                        headers: CORS_HEADERS
-                    });
-                }
-
-                if (postgres != null) {
-                    let data = await postgres`SELECT * FROM ${postgres(taskName)}`;
-                    return new Response(JSON.stringify(data, null, 2), { headers: CORS_HEADERS });
-                }
-
-                return new Response(JSON.stringify({ error: "Database connection failed" }), {
-                    status: 500,
-                    headers: CORS_HEADERS
-                });
-            }
-        },
-
-        // Gives the worker an unique number.
-        "/api/worker/number": {
-            GET: async () => {
-                if (postgres != null) {
-                    let data = await postgres`INSERT INTO workers DEFAULT VALUES RETURNING worker_number;`
-                    return new Response(JSON.stringify({ "worker_number": data[0].worker_number }), { headers: CORS_HEADERS })
-                }
-                return Response.json({ status: 400, headers: CORS_HEADERS })
-            }
-        },
+        
     },
 
     fetch(req) {

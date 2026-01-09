@@ -103,7 +103,7 @@ function initTextarea(el) {
       if (thresholdCounter === null) thresholdCounter = activeNowMs;
 
       if ((activeNowMs - thresholdCounter) >= WPM_SUSTAIN_MS) {
-        console.log("[WPM Detector] High WPM detected:", metrics);
+        // console.log("[WPM Detector] High WPM detected:", metrics);
         showPopup("Sustained High Typing Speed");
         thresholdCounter = null;
       }
@@ -111,7 +111,7 @@ function initTextarea(el) {
       thresholdCounter = null;
     }
 
-    if (debug && !WPM_MODAL_OPEN) console.log("[WPM Debug] WPM update:", metrics);
+    // if (debug && !WPM_MODAL_OPEN) console.log("[WPM Debug] WPM update:", metrics);
   }
 
   function startIntervals() {

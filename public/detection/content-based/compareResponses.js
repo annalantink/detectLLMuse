@@ -50,7 +50,7 @@ export async function compareUserResponse(userText, task = "summary1") {
     }
   }
 
-  console.log("Max similarity computed:", maxSimilarity);
+  // console.log("Max similarity computed:", maxSimilarity);
 
   return {
     similarity: maxSimilarity
