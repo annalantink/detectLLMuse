@@ -11,6 +11,12 @@
 
 <body id="doc_body">
     <script>
+        let currentTabSwitchCount = parseInt(sessionStorage.getItem('tabswitchCount1')) || 0;
+        sessionStorage.setItem('tab_switch', currentTabSwitchCount);
+
+        let currentPopupCount = parseInt(sessionStorage.getItem('popupCount1')) || 0;
+        sessionStorage.setItem('number_popups', currentTabSwitchCount);
+
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {

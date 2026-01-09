@@ -11,6 +11,12 @@
 
 <body>
     <script>
+        let currentTabSwitchCount = parseInt(sessionStorage.getItem('tabswitchCount2')) || 0;
+        sessionStorage.setItem('tab_switch', currentTabSwitchCount);
+
+        let currentPopupCount = parseInt(sessionStorage.getItem('popupCount2')) || 0;
+        sessionStorage.setItem('number_popups', currentTabSwitchCount);
+
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {
@@ -36,46 +42,63 @@
                 <div style="font-size: 12px;" class="info_text">
                     <h2>Task Description</h2>
                     <p>
-                        You are being asked to participate in a research study about identifying characteristics of, and patterns in, 
-                        the summarization of research abstracts. This assignment will take you approximately 20 minutes to complete. 
+                        You are being asked to participate in a research study about identifying characteristics of, and
+                        patterns in,
+                        the summarization of research abstracts. This assignment will take you approximately 20 minutes
+                        to complete.
                         This study is being done by masters students from the TU Delft, and will be used for a project
-                        for the Crowd Computing course provided by the university. Data collected from this assignment may be included in a report 
+                        for the Crowd Computing course provided by the university. Data collected from this assignment
+                        may be included in a report
                         and presentation submitted for the course.
                     </p>
                     <p>
                         For this assignment, you will first read an example of an abstract and a valid summary.
-                        Next, you will complete two abstract summarization tasks. For these, you will be provided an abstract,
-                        which you should summarize in the text box below it. The abstracts are 120-170 words in length, and
-                        the <b>summaries should be roughly 2-4 sentences in length.</b> You do not need expertise in any subject 
+                        Next, you will complete two abstract summarization tasks. For these, you will be provided an
+                        abstract,
+                        which you should summarize in the text box below it. The abstracts are 120-170 words in length,
+                        and
+                        the <b>summaries should be roughly 2-4 sentences in length.</b> You do not need expertise in any
+                        subject
                         to complete these summarization tasks. Finally, you must complete a survey about your experience
-                        writing the summaries. Once the survey is complete, you can click "Submit" and you will be redirected to Prolific.
+                        writing the summaries. Once the survey is complete, you can click "Submit" and you will be
+                        redirected to Prolific.
                         On any page, this opening statement can be read by clicking the "?" button.
                     </p>
                     <p>
                         Please consider the following when completing this assignment:
                         <br><br>
-                        Once you have completed a section, please do not go back to it. <b>Moving back to previous pages may
-                        introduce bugs that will risk the completion of your assignment.</b>
+                        Once you have completed a section, please do not go back to it. <b>Moving back to previous pages
+                            may
+                            introduce bugs that will risk the completion of your assignment.</b>
                         <br><br>
                         For the best experience, <b>please complete this survey in your browser's full screen mode.</b>
                         <br><br>
-                        <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task. That said, 
-                        the purpose of this study is to understand human reasoning and expression. For this reason, answers written 
-                        mostly in your own words and ideas are much more valuable to us than answers that closely resemble typical AI outputs.
+                        <b>You are allowed to use AI tools</b> (such as ChatGPT or similar) while completing this task.
+                        That said,
+                        the purpose of this study is to understand human reasoning and expression. For this reason,
+                        answers written
+                        mostly in your own words and ideas are much more valuable to us than answers that closely
+                        resemble typical AI outputs.
                         <br><br>
-                        After writing two summaries and fully completing the survey, you will be financially compensated with a rate of 6£ per hour.            
+                        After writing two summaries and fully completing the survey, you will be financially compensated
+                        with a rate of 6£ per hour.
                     </p>
 
                     <h2>Consent and Participant Information</h2>
                     <p>
-                        To the best of our abilities, your data will be stored securely. We will collect and store the summaries you write, behavioral data that 
-                        is tracked as you write, and your Prolific ID. The only personally identifying information that is stored will be your Prolific ID. 
-                        The Prolific ID is stored exclusively for the quality management of the collected data, and will only be visible to the research team.
-                        Data used for the Crowd Computing project will have the Prolific ID removed. The data will be stored in a database provided by Render.com.
+                        To the best of our abilities, your data will be stored securely. We will collect and store the
+                        summaries you write, behavioral data that
+                        is tracked as you write, and your Prolific ID. The only personally identifying information that
+                        is stored will be your Prolific ID.
+                        The Prolific ID is stored exclusively for the quality management of the collected data, and will
+                        only be visible to the research team.
+                        Data used for the Crowd Computing project will have the Prolific ID removed. The data will be
+                        stored in a database provided by Render.com.
                     </p>
                     <p>
-                        <b>Since you clicked the "Next Page" button, you have consented to participating in this research.</b> For logistical reasons,
-                        your data cannot be removed once you have consented to participating. 
+                        <b>Since you clicked the "Next Page" button, you have consented to participating in this
+                            research.</b> For logistical reasons,
+                        your data cannot be removed once you have consented to participating.
                     </p>
                 </div>
             </div>
