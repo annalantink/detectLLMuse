@@ -382,8 +382,8 @@
                 await submitSummarizationTask(1);
                 await submitSummarizationTask(2);
 
-                let currentCount = parseInt(sessionStorage.getItem('tabswitchCountSurvey')) || 0;
-                let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
+                let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
+                let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCountSurvey')) || 0;
                 const pid = sessionStorage.getItem('pid');
 
                 const responseData = {
