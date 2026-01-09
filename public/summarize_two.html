@@ -169,6 +169,7 @@
     <script src="detection/detection.js"></script>
     <script src="detection/behavior/wpm.js"></script>
     <script src="/detection/behavior/tabSwitch.js"></script>
+    <script>detectTabSwitch("2");</script>
     <script src="detection/behavior/pause.js"></script>
     <script src="detection/behavior/backspace.js"></script>
     <script>
@@ -190,7 +191,7 @@
             const summarization = document.getElementById("summaryTwoInput").value;
 
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
-            let tabswitchCount = parseInt(sessionStorage.getItem('tab_switch')) || 0;
+            let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCount2')) || 0;
 
             if (!summarization.trim()) {
                 alert("Please write a summary before proceeding.");

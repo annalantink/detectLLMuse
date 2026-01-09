@@ -11,11 +11,15 @@
 <body>
     <script>
         sessionStorage.setItem('number_popups', 0);
-        sessionStorage.setItem('tab_switch', 0);
+        sessionStorage.setItem('tabswitchCount1', 0);
+        sessionStorage.setItem('tabswitchCount2', 0);
+        sessionStorage.setItem('tabswitchCountSurvey', 0);
         sessionStorage.setItem('summarization1', 0);
         sessionStorage.setItem('popupCount1', 0);
         sessionStorage.setItem('summarization2', 0);
         sessionStorage.setItem('popupCount2', 0);
+        sessionStorage.setItem('summarization2', 0);
+
         function captureProlificData() {
             const params = new URLSearchParams(window.location.search);
 
