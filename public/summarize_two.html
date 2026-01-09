@@ -15,12 +15,11 @@
             const navigationType = performance.getEntriesByType("navigation")[0]?.type;
 
             if (event.persisted || navigationType === 'back_forward') {
-                let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCount2')) || 0;
-                
-                if (tabswitchCount > 0) {
-                    sessionStorage.setItem('tabswitchCount2', tabswitchCount - 1);
-                }
+                detectTabSwitch("2");
             }
+            window.addEventListener('beforeunload', (event) => {
+                stopDetectingTabSwitch();
+            });
         });
 
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
@@ -205,7 +204,7 @@
 
             sessionStorage.setItem('summarization2', summarization);
             sessionStorage.setItem('popupCount2', currentCount);
-            
+
             console.log(parseInt(sessionStorage.getItem('tabswitchCount2')) || 0);
 
             window.location.href = "/survey"
