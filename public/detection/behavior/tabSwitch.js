@@ -6,7 +6,6 @@ function detectTabSwitch(number) {
     } else {
       let currentCount = parseInt(sessionStorage.getItem(`tabswitchCount${number}`)) || 0;
       sessionStorage.setItem(`tabswitchCount${number}`, currentCount + 1);
-      console.log(parseInt(sessionStorage.getItem(`tabswitchCount${number}`)) || 0);
     }
   });
 }

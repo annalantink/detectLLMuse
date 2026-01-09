@@ -12,7 +12,17 @@
 
 <body>
     <script>
-        sessionStorage.setItem('tab_switch', 0);
+        window.addEventListener('pageshow', (event) => {
+            const navigationType = performance.getEntriesByType("navigation")[0]?.type;
+
+            if (event.persisted || navigationType === 'back_forward') {
+                let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCountSurvey')) || 0;
+                
+                if (tabswitchCount > 0) {
+                    sessionStorage.setItem('tabswitchCountSurvey', tabswitchCount - 1);
+                }
+            }
+        });
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {

@@ -11,11 +11,17 @@
 
 <body id="doc_body">
     <script>
-        let currentTabSwitchCount = parseInt(sessionStorage.getItem('tabswitchCount1')) || 0;
-        sessionStorage.setItem('tab_switch', currentTabSwitchCount);
+        window.addEventListener('pageshow', (event) => {
+            const navigationType = performance.getEntriesByType("navigation")[0]?.type;
 
-        let currentPopupCount = parseInt(sessionStorage.getItem('popupCount1')) || 0;
-        sessionStorage.setItem('number_popups', currentPopupCount);
+            if (event.persisted || navigationType === 'back_forward') {
+                let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCount1')) || 0;
+                
+                if (tabswitchCount > 0) {
+                    sessionStorage.setItem('tabswitchCount1', tabswitchCount - 1);
+                }
+            }
+        });
 
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
@@ -146,7 +152,6 @@
             const summarization = document.getElementById("summaryOneInput").value;
 
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
-            let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCount1')) || 0;
 
             if (!summarization.trim()) {
                 alert("Please write a summary.");
@@ -155,7 +160,9 @@
 
             sessionStorage.setItem('summarization1', summarization);
             sessionStorage.setItem('popupCount1', currentCount);
-            sessionStorage.setItem('tabswitchCount1', tabswitchCount);
+
+            console.log(parseInt(sessionStorage.getItem('tabswitchCount1')) || 0);
+            
             window.location.href = "/summarize_two"
         }
 
