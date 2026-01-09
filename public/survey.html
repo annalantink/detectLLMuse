@@ -18,12 +18,11 @@
             const navigationType = performance.getEntriesByType("navigation")[0]?.type;
 
             if (event.persisted || navigationType === 'back_forward') {
-                let tabswitchCount = parseInt(sessionStorage.getItem('tabswitchCountSurvey')) || 0;
-                
-                if (tabswitchCount > 0) {
-                    sessionStorage.setItem('tabswitchCountSurvey', tabswitchCount - 1);
-                }
+                detectTabSwitch("Survey");
             }
+            window.addEventListener('beforeunload', (event) => {
+                stopDetectingTabSwitch();
+            });
         });
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
