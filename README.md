@@ -15,4 +15,4 @@ The application can be run locally using the command:
 node app.js
 ```
 
-When run, the application will open in `http://localhost:3000/`.
+When run, the application will open in `http://localhost:3000/`. Note that, when run locally, the data will not persist to the database.
