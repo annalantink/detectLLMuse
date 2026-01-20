@@ -2,6 +2,7 @@ import { pipeline } from "@xenova/transformers";
 
 let extractor = null;
 
+// Load model to use for creating text embeddings
 async function loadModel() {
   if (!extractor) {
     extractor = await pipeline(

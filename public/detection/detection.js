@@ -33,7 +33,7 @@ function closePopup() {
   // unpause all detectors
   window.WPM_DETECTOR.resumeAll();
 }
-
+// Detect similarity to pre-generated AI summaries
 function setupDetection(textareaId, taskName) {
   const textarea = document.getElementById(textareaId);
   let lastCheckedLength = 0;
@@ -42,11 +42,13 @@ function setupDetection(textareaId, taskName) {
     const text = textarea.value;
     const length = text.length;
 
+    // If the length of the text, or if the time since the last check, is too short, skip the check
     if (length < 100) return;
     if (length - lastCheckedLength < 10) return;
 
     lastCheckedLength = length;
 
+    // Make's a request to calculate the cosine similarity
     try {
       const response = await fetch("/detect_content", {
         method: "POST",
@@ -56,6 +58,7 @@ function setupDetection(textareaId, taskName) {
 
       const result = await response.json();
       
+      // If similarity is higher than 0.87, show pop-up
       if (result.similarity >= 0.88) {
           showPopup("High cosine similarity detected");
       }

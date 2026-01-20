@@ -11,6 +11,7 @@
 
 <body>
     <script>
+        // Initialize backend
         const BACKEND = "https://detectllmuse-backend.onrender.com/api/status";
         fetch(BACKEND)
             .then((response) => {
@@ -160,10 +161,12 @@
             </div>
         </div>
     </div>
+    <!-- Connect the behavior and content based detection methods -->
     <script src="detection/detection.js"></script>
     <script src="detection/behavior/wpm.js"></script>
     <script src="/detection/behavior/tabSwitch.js"></script>
     <script>
+        // Tracker to count the number of tab switches
         detectTabSwitch("2");
 
         window.addEventListener('pageshow', (event) => {
@@ -183,21 +186,26 @@
     </script>
 
     <script>
+        // Open and close the info bar containing the opening statement
         function openInfo() { document.getElementById("info_bar").style.width = "500px"; }
 
         function closeInfo() { document.getElementById("info_bar").style.width = "0"; } 
     </script>
 
     <script>
+        // Script to deactivate copy paste and cut in the summary box
         document.addEventListener("copy", function (e) { e.preventDefault(); });
         document.addEventListener("paste", function (e) { e.preventDefault(); });
         document.addEventListener("cut", function (e) { e.preventDefault(); });
         document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
+        // Code to submit this page's information to the backend
         function submit() {
             const summarization = document.getElementById("summaryTwoInput").value;
 
             let currentCount = parseInt(sessionStorage.getItem('number_popups')) || 0;
 
+            // If no summary is written, send an alert and prevent submission
             if (!summarization.trim()) {
                 alert("Please write a summary before proceeding.");
                 return;

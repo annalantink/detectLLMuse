@@ -17,6 +17,7 @@ try {
   console.error("Could not load llm_embeddings.json", err);
 }
 
+// Function to compute similarity between two vectors (vectors are text embeddings of the summaries in this case)
 function cosineSimilarity(a, b) {
   let dot = 0;
   let normA = 0;
@@ -31,6 +32,7 @@ function cosineSimilarity(a, b) {
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
+// Compute the maximum similarity between a users summary and all of the pre-generated AI summaries
 export async function compareUserResponse(userText, task = "summary1") {
   console.log("Received detection request for:", task, "| Input length:", userText.length);
   const userEmbedding = await getUserEmbedding(userText);
